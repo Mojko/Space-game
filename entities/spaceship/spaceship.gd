@@ -9,6 +9,7 @@ export(float, 0, 1000, 0.01) var speed;
 export(Curve) var acceleration_curve;
 
 signal shoot(direction, invulnerables);
+signal has_shot();
 
 onready var physics_body = get_node(physics_body_path);
 onready var fire_particles = get_node(fire_particles_path);
@@ -37,4 +38,9 @@ func get_physics_body() -> KinematicBody:
 
 func _on_host_shoot(direction, invulnerables):
 	emit_signal("shoot", direction, invulnerables);
+	pass
+	
+func _on_loadout_has_shot():
+	print("wew2");
+	emit_signal("has_shot");
 	pass

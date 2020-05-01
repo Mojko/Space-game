@@ -36,4 +36,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.831243, 0, -0.186337 )
 [node name="attack_delay" type="Timer" parent="." index="4"]
 wait_time = 0.5
 [connection signal="shoot" from="." to="loadout" method="_on_host_shoot"]
+[connection signal="has_shot" from="loadout" to="." method="_on_loadout_has_shot"]
 [connection signal="timeout" from="attack_delay" to="loadout" method="_on_attack_delay_timeout"]

@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Space Game"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/world_1.tscn"
 config/icon="res://Default/icon.png"
 
 [autoload]
@@ -47,6 +47,11 @@ config/icon="res://Default/icon.png"
 Strings="*res://scripts/strings.gd"
 Weapons="*res://entities/loadout/weapons.gd"
 Groups="*res://scripts/groups.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 

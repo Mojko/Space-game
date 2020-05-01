@@ -1,7 +1,12 @@
 extends KinematicBody
 class_name Entity
 
+signal i_have_spawned(entity);
+
 var acceleration_curve_x : float = 0;
+
+func _ready():
+	emit_signal("i_have_spawned", self);
 
 #####
 # Function: move(direction, acceleration_curve, speed)

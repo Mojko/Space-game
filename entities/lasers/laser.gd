@@ -1,5 +1,9 @@
 extends Spatial
 
+export(PackedScene) var hit_particle;
+
+signal hit();
+
 var is_firing : bool;
 var fire_direction : Vector3;
 var speed : float;
@@ -31,5 +35,16 @@ func _on_laser_00_body_entered(body):
 	for i in invulnerables:
 		if(body.is_in_group(i)):
 			return
+			
+	var instance = self.hit_particle.instance();
+	instance.set_emitting(true);
+	#instance.look_at(self.fire_direction, Vector3.UP);
+	instance.global_transform.origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y, self.global_transform.origin.z);
+	#instance.rotation_degrees.y = self.rotation_degrees.y
+	get_tree().get_root().add_child(instance);
+	
+	if(body.has_method("on_hit")):
+		body.on_hit();
+		
 	queue_free();
 	pass

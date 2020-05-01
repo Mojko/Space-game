@@ -3,12 +3,14 @@ class_name Player
 
 export(NodePath) var camera_path;
 export(NodePath) var aim_timer_path;
+export(NodePath) var sfx_pew_path;
 
 signal thrust(state);
 signal shoot(direction, invulnerables);
 
 onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node(aim_timer_path);
+onready var sfx_pew : AudioStreamPlayer = get_node(sfx_pew_path);
 
 var spaceship : Spaceship;
 var direction : Vector3 = Vector3();
@@ -33,7 +35,6 @@ func _physics_process(delta):
 #
 ####
 func handle_movement() -> Vector3:
-	print(global_transform.origin.y);
 	direction = Vector3();
 	
 	if(Input.is_action_pressed("move_up")):
@@ -90,7 +91,6 @@ func handle_shooting():
 ####
 func emit_fire_particle():
 	if(direction.length() > 0):
-		#move_particles.set_emitting(true);
 		emit_signal("thrust", true);
 		pass
 	else:
@@ -107,7 +107,7 @@ func raycast_from_mouse():
 	var from : Vector3 = camera.project_ray_origin(get_viewport().get_mouse_position());
 	var to : Vector3 = from + camera.project_ray_normal(get_viewport().get_mouse_position()) * 1000;
 	var space_state : PhysicsDirectSpaceState = get_world().get_direct_space_state();
-	var result : Dictionary = space_state.intersect_ray(from, to, [], 0x7FFFFFFF, false, true);
+	var result : Dictionary = space_state.intersect_ray(from, to, [], 0x80000, false, true);
 	
 	return result;
 
@@ -122,6 +122,7 @@ func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.connect("thrust", spaceship, "set_thrust_state");
 	self.connect("shoot", spaceship, "_on_host_shoot");
+	spaceship.connect("has_shot", self, "on_has_shot");
 	pass
 
 #####
@@ -135,4 +136,8 @@ func equip_spaceship(var spaceship : Spaceship):
 ####
 func _on_AimTimer_timeout():
 	rotate_with_mouse = false;
+	pass
+	
+func on_has_shot():
+	sfx_pew.play();
 	pass

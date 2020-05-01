@@ -4,6 +4,8 @@ export(NodePath) var host_path;
 export(Array, NodePath) var weapon_slots_path = [];
 export(NodePath) var attack_delay_path;
 
+signal has_shot;
+
 onready var host = get_node(host_path);
 onready var attack_delay : Timer = get_node(attack_delay_path);
 
@@ -21,7 +23,6 @@ func _ready():
 		pass
 	
 	weapon_slots.front().equip_weapon(Weapons.get_weapon(Weapons.Types.LF0));
-	
 	pass
 
 #func _process(delta):
@@ -43,6 +44,7 @@ func _on_host_shoot(direction, invulnerables):
 	can_shoot = false;
 	
 	self.attack_delay.start();
+	emit_signal("has_shot");
 	pass
 	
 func equip_weapon(var index : int, var weapon_type : Dictionary):
