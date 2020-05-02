@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/world_1.gd" type="Script" id=1]
 [ext_resource path="res://Default/env.tres" type="Environment" id=2]
@@ -17,11 +17,10 @@
 [ext_resource path="res://entities/loadout/loadout.tscn" type="PackedScene" id=15]
 [ext_resource path="res://audio/sfx/damage.wav" type="AudioStream" id=16]
 [ext_resource path="res://particles/hit/hit.tscn" type="PackedScene" id=17]
-
-[sub_resource type="CubeMesh" id=1]
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 1, 0, 0, 1 )
+[ext_resource path="res://particles/stars/stars_layer_1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://particles/stars/stars_layer_2.tscn" type="PackedScene" id=19]
+[ext_resource path="res://environment/planet_0/planet.tscn" type="PackedScene" id=20]
+[ext_resource path="res://images/fog.png" type="Texture" id=21]
 
 [sub_resource type="BoxShape" id=3]
 
@@ -34,6 +33,22 @@ extents = Vector3( 17.3628, 1.9938, 15.6717 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 35, 5.15797, 35.5261 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.443137, 0.0823529, 0.0823529, 0.509804 )
+albedo_texture = ExtResource( 21 )
+
+[sub_resource type="QuadMesh" id=9]
+material = SubResource( 10 )
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.00609994 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="world_1" type="Spatial"]
 script = ExtResource( 1 )
@@ -50,41 +65,6 @@ environment = ExtResource( 2 )
 
 [node name="minimap" parent="." instance=ExtResource( 3 )]
 player_path = NodePath("../player")
-
-[node name="world_borders" type="Spatial" parent="."]
-editor/display_folded = true
-
-[node name="border_1" type="Spatial" parent="world_borders"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 50.8809, 37.506, 0, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="world_borders/border_1"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="border_2" type="Spatial" parent="world_borders"]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 50.8809, -34.6887, 0, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="world_borders/border_2"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="border_3" type="Spatial" parent="world_borders"]
-editor/display_folded = true
-transform = Transform( -4.37114e-008, 0, 50.8809, 0, 1, 0, -1, 0, -2.22407e-006, 1.53181, 0, 38.3951 )
-
-[node name="MeshInstance" type="MeshInstance" parent="world_borders/border_3"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="border_4" type="Spatial" parent="world_borders"]
-editor/display_folded = true
-transform = Transform( -4.37114e-008, 0, 50.8809, 0, 1, 0, -1, 0, -2.22407e-006, 1.53181, 0, -39.5127 )
-
-[node name="MeshInstance" type="MeshInstance" parent="world_borders/border_4"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
 
 [node name="camera" type="Camera" parent="."]
 transform = Transform( 0.503961, 0.553087, -0.663414, 0.00546828, 0.766025, 0.642788, 0.863709, -0.327568, 0.383022, -13.3688, 12.8765, 7.313 )
@@ -191,6 +171,31 @@ stream = ExtResource( 16 )
 
 [node name="hit" parent="." instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32921, 0, 0 )
+angular_velocity = 0.037037
+
+[node name="environment" type="Spatial" parent="."]
+
+[node name="stars_layer_1" parent="environment" instance=ExtResource( 18 )]
+
+[node name="stars_layer_2" parent="environment" instance=ExtResource( 19 )]
+
+[node name="planet" parent="environment" instance=ExtResource( 20 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, -9.38649, -11.0745, -22.2156 )
+
+[node name="fog" type="CPUParticles" parent="environment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67.3681, -91.242, -76.9636 )
+amount = 10
+lifetime = 132.57
+preprocess = 320.0
+mesh = SubResource( 9 )
+emission_shape = 1
+emission_sphere_radius = 35.0
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.1
+scale_amount = 100.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 13 )
 [connection signal="i_have_spawned" from="player" to="minimap" method="_on_player_i_have_spawned"]
 [connection signal="timeout" from="player/AimTimer" to="player" method="_on_AimTimer_timeout"]
 [connection signal="i_have_spawned" from="alien" to="minimap" method="_on_alien_i_have_spawned"]

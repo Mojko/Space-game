@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://images/particle.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=11]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 1, 1, 0.729412 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=12]
+material = SubResource( 11 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.504597, 0.995 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="stars_layer_1" type="CPUParticles"]
+amount = 750
+lifetime = 25.0
+preprocess = 39.2
+mesh = SubResource( 12 )
+emission_shape = 1
+emission_sphere_radius = 61.1
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 0.037037
+scale_amount_curve = SubResource( 10 )

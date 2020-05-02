@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/skybox.jpg-c03d40b4687243d4e206828d00f9bbae.s3tc.stex"
-path.etc="res://.import/skybox.jpg-c03d40b4687243d4e206828d00f9bbae.etc.stex"
+path.s3tc="res://.import/particle.png-446cef12c93f1e8d52a81d796ec49790.s3tc.stex"
+path.etc="res://.import/particle.png-446cef12c93f1e8d52a81d796ec49790.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://images/skybox.jpg"
-dest_files=[ "res://.import/skybox.jpg-c03d40b4687243d4e206828d00f9bbae.s3tc.stex", "res://.import/skybox.jpg-c03d40b4687243d4e206828d00f9bbae.etc.stex" ]
+source_file="res://images/particle.png"
+dest_files=[ "res://.import/particle.png-446cef12c93f1e8d52a81d796ec49790.s3tc.stex", "res://.import/particle.png-446cef12c93f1e8d52a81d796ec49790.etc.stex" ]
 
 [params]
 
