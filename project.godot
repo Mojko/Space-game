@@ -50,8 +50,10 @@ Groups="*res://scripts/groups.gd"
 
 [display]
 
+window/size/width=960
+window/size/height=540
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [input]
 

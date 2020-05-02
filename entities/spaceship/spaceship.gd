@@ -21,7 +21,7 @@ func _ready():
 #	pass
 
 func set_thrust_state(state):
-	fire_particles.set_emitting(state);
+	fire_particles.emit(state);
 	pass
 
 func get_acceleration(var x : float) -> float:
