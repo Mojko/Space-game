@@ -5,8 +5,14 @@
 [ext_resource path="res://ui/minimap/blip_rotate.gd" type="Script" id=3]
 
 [node name="minimap" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -270.0
+margin_right = 480.0
+margin_bottom = 270.0
 script = ExtResource( 1 )
 minimap_path = NodePath("minimap")
 
@@ -15,8 +21,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -331.0
-margin_top = -331.0
+margin_left = -160.0
+margin_top = -160.0
 
 [node name="blip_player3" type="ColorRect" parent="minimap"]
 anchor_left = 0.5
@@ -34,12 +40,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -40.5
-margin_top = -25.875
-margin_right = 40.5
-margin_bottom = 25.875
+margin_left = -20.0
+margin_top = -12.9375
+margin_right = 20.0
+margin_bottom = 12.9375
 rect_rotation = -40.0
-rect_pivot_offset = Vector2( 44.5, 20 )
+rect_pivot_offset = Vector2( 22.5, 12 )
 texture = ExtResource( 2 )
 expand = true
 script = ExtResource( 3 )

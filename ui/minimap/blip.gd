@@ -10,7 +10,7 @@ var maxY;
 func _process(delta):
 	if(self.center != null and self.target != null):
 		var difference = center.global_transform.origin - target.global_transform.origin;
-		rect_position = Vector2(90*1.6 - ((difference.x + difference.z * 2)) * 3, 80*1.6 - ((difference.z - difference.x * 2)) * 3);
+		rect_position = Vector2(90 - ((difference.x + difference.z * 2)) * 2, 80 - ((difference.z - difference.x * 2)) * 2);
 		#print(rect_position);
 		check_bounds();
 	
