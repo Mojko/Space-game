@@ -138,8 +138,8 @@ chase_path = NodePath("../../world_1/player")
 transform = Transform( -1, 0, 8.74228e-008, 0, 1, 0, -8.74228e-008, 0, -1, -4.17082, 0, 0 )
 
 [node name="alien" type="KinematicBody" parent="." groups=[
-"is_hitable",
 "enemy",
+"is_hitable",
 ]]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00577, 0, -30.9528 )
