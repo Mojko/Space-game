@@ -41,6 +41,5 @@ func _on_host_shoot(direction, invulnerables):
 	pass
 	
 func _on_loadout_has_shot():
-	print("wew2");
 	emit_signal("has_shot");
 	pass

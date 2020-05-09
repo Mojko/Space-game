@@ -141,3 +141,6 @@ func _on_AimTimer_timeout():
 func on_has_shot():
 	sfx_pew.play();
 	pass
+	
+func on_hit():
+	pass
