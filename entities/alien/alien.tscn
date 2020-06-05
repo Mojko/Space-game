@@ -12,7 +12,6 @@ script = ExtResource( 2 )
 
 [node name="loadout" parent="." index="2" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
-host_path = NodePath("..")
 weapon_slots_path = [ NodePath("weapon_slot"), NodePath("weapon_slot2") ]
 attack_delay_path = NodePath("../attack_delay")
 

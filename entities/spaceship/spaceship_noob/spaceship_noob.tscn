@@ -8,23 +8,21 @@
 [ext_resource path="res://entities/loadout/loadout.gd" type="Script" id=6]
 [ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.236 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[node name="spaceship_noob" index="0" instance=ExtResource( 1 )]
+[node name="spaceship_noob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-fire_particles_path = NodePath("fire_particles")
 health = 100
 speed = 5.0
 acceleration_curve = ExtResource( 3 )
-deacceleration_curve = SubResource( 2 )
+deacceleration_curve = SubResource( 1 )
 
 [node name="fire_particles" parent="." index="2" instance=ExtResource( 4 )]
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.164873, 1.02092 )
 
 [node name="loadout" parent="." index="3" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
-host_path = NodePath("..")
 weapon_slots_path = [ NodePath("weapon_slot1"), NodePath("weapon_slot2"), NodePath("weapon_slot3") ]
 attack_delay_path = NodePath("../attack_delay")
 

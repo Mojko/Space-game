@@ -7,12 +7,12 @@ enum State {
 	ATTACK
 }
 
-export(NodePath) var sfx_hurt_path;
-
+signal hit(from);
 signal shoot(direction, invulnerables);
-signal hit();
+signal death(entity);
 
-onready var sfx_hurt = get_node(sfx_hurt_path);
+onready var sfx_hurt = get_node("hurt");
+onready var shoot_timer = get_node("shoot_timer");
 
 var state = State.ATTACK;
 var target : Entity;
@@ -26,7 +26,7 @@ enum TargetRangeType {
 
 func _ready():
 	target = get_parent().get_parent().get_node("player");
-	get_tree().call_group("spawn_listener", "i_have_spawned", self);
+	get_tree().call_group("spawn_listener", "alien_have_spawned", self);
 
 func _process(delta):
 	match state:
@@ -61,24 +61,33 @@ func handle_attacking():
 		var look_dir = global_transform.origin - target.global_transform.origin;
 		look_at_smooth(look_dir, 0.2);
 		#emit_signal("shoot", -look_dir.normalized(), [Groups.Enemy]);
+		shoot(-look_dir.normalized());
 		
 		if(global_transform.origin.distance_to(target.global_transform.origin) > 9):
 			move_and_slide(-look_dir.normalized() * speed);
 			pass
 		pass
 	pass
+
+func shoot(aim_direction):
+	if(shoot_timer.is_finished() and rand_range(0, 10) <= 1):
+		for weapon in alien.loadout.get_loadout():
+			if(weapon.has_weapon() and shoot_timer.can_shoot()):
+				emit_signal("shoot", weapon, aim_direction, [Groups.Enemy]);
+		shoot_timer.start();
 	
 func equip_alien(var alien : Alien):
 	self.alien = alien;
-	self.connect("shoot", self.alien, "_on_host_shoot");
-	self.connect("hit", self.alien, "_on_host_hit");
 	self.alien.connect("death", self, "_on_alien_death");
 	pass
 	
 func on_hit():
+	alien.health -= 1;
 	sfx_hurt.play();
-	emit_signal("hit");
-	pass
+	emit_signal("hit", self);
+	if(alien.health <= 0):
+		emit_signal("death", self);
+		queue_free();
 	
 func in_attack_range(var object : Spatial) -> bool:
 	return object.global_transform.origin.distance_to(self.global_transform.origin) < 4;

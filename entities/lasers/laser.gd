@@ -3,6 +3,9 @@ extends Spatial
 export(PackedScene) var hit_particle;
 
 signal hit();
+signal death(instance);
+
+onready var death_timer = get_node("death_timer");
 
 var is_firing : bool;
 var fire_direction : Vector3;
@@ -23,6 +26,7 @@ func fire(var direction : Vector3, var speed : float, var invulnerables : Array)
 	self.fire_direction = direction;
 	self.speed = speed;
 	self.invulnerables = invulnerables;
+	death_timer.start();
 	
 	var nd : Vector3 = self.global_transform.origin - fire_direction;
 	look_at(Vector3(nd.x, 0, nd.z), Vector3.UP);
@@ -36,19 +40,23 @@ func _on_laser_00_body_entered(body):
 		if(body.is_in_group(i)):
 			return
 			
-	var instance = self.hit_particle.instance();
-	instance.set_emitting(true);
-	#instance.look_at(self.fire_direction, Vector3.UP)
-	#instance.rotation_degrees.y = self.rotation_degrees.y
-	get_tree().get_root().add_child(instance);
-	instance.global_transform.origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y, self.global_transform.origin.z);
-	
 	if(body.has_method("on_hit")):
 		body.on_hit();
-		
-	queue_free();
+			
+	emit_signal("death", self);
+	death_timer.stop();
+			
+#	var instance = self.hit_particle.instance();
+#	instance.set_emitting(true);
+#	get_tree().get_root().add_child(instance);
+#	instance.global_transform.origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y, self.global_transform.origin.z);
+#
+#	if(body.has_method("on_hit")):
+#		body.on_hit();
+#
+#	queue_free();
 	pass
 
 func _on_death_timer_timeout():
-	#queue_free();
-	pass
+	emit_signal("death", self);
+	death_timer.stop();

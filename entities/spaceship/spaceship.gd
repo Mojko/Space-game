@@ -1,8 +1,6 @@
 extends Spatial
 class_name Spaceship
 
-export(NodePath) var fire_particles_path;
-
 export(int, 0, 1000, 1.0) var health;
 export(float, 0, 1000, 0.01) var speed;
 export(Curve) var acceleration_curve;
@@ -16,7 +14,6 @@ onready var loadout = get_node("loadout");
 
 func set_thrust_state(state):
 	fire_particles.emit(state);
-	pass
 
 func get_acceleration(var x : float) -> float:
 	return acceleration_curve.interpolate(x);

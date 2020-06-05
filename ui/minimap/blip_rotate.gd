@@ -10,3 +10,6 @@ func _process(delta):
 
 func attach(target):
 	self.target = target;
+	
+func get_attachment():
+	return target;

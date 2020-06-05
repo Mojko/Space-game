@@ -4,15 +4,20 @@ class_name Player
 export(NodePath) var camera_path;
 
 signal thrust(state);
-signal shoot(direction, invulnerables);
+signal shoot(from, direction, invulnerables);
 
 onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node("aim_timer");
 onready var sfx_pew : AudioStreamPlayer = get_node("pew");
+onready var shoot_timer : Timer = get_node("shoot_timer");
 
 var spaceship : Spaceship;
 var direction : Vector3 = Vector3();
 var rotate_with_mouse : bool = false;
+var can_shoot : bool = false;
+
+func _ready():
+	get_tree().call_group("spawn_listener", "player_has_spawned", self);
 
 func _physics_process(delta):
 	
@@ -89,10 +94,23 @@ func handle_shooting():
 		if(result.has('position')):
 			var aim_direction = (self.global_transform.origin - result.position).normalized();
 			self.look_at_smooth(aim_direction, 1);
+			
 			aim_timer.start();
-			emit_signal("shoot", -Vector3(aim_direction.x, 0, aim_direction.z), [Groups.Player]);
+			shoot(aim_direction);
 		pass
 	pass
+	
+func shoot(aim_direction):
+	if(shoot_timer.is_finished()):
+		
+		for i in 360:
+			emit_signal("shoot", self, Vector3(cos(i), 0, sin(i)), [Groups.Player]);
+			pass
+		
+#		for weapon in spaceship.loadout.get_loadout():
+#			if(weapon.has_weapon() and shoot_timer.can_shoot()):
+#				emit_signal("shoot", self, -Vector3(aim_direction.x, 0, aim_direction.z), [Groups.Player]);
+		shoot_timer.start();
 
 #####
 # Function: emit_fire_particle()
@@ -134,7 +152,6 @@ func raycast_from_mouse():
 func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.connect("thrust", spaceship, "set_thrust_state");
-	#self.connect("shoot", spaceship, "_on_host_shoot");
 	spaceship.connect("has_shot", self, "on_has_shot");
 	pass
 
