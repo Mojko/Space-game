@@ -1,12 +1,9 @@
 extends KinematicBody
 class_name Entity
 
-signal i_have_spawned(entity);
-
+var last_moving_direction : Vector3 = Vector3();
 var acceleration_curve_x : float = 0;
-
-func _ready():
-	emit_signal("i_have_spawned", self);
+var velocity : Vector3 = Vector3();
 
 #####
 # Function: move(direction, acceleration_curve, speed)
@@ -16,26 +13,51 @@ func _ready():
 # Returns: -
 #
 ####
-func move(var direction : Vector3, var acceleration_curve : Curve, var speed : float) -> Vector3:
-	accelerate(direction);
-	var velocity = move_and_slide(direction.normalized() * acceleration_curve.interpolate(acceleration_curve_x) * speed, Vector3.UP);
-	return velocity;
+func move(var direction : Vector3, var speed : float, var acceleration_curve : Curve = null) -> Vector3:
+	
+	if(direction.length() > 0):
+		last_moving_direction = direction;
+	
+	var vel = Vector3();
+	
+	var acceleration = acceleration_curve.interpolate(acceleration_curve_x);
+	
+	var final_velocity = Vector3();
+	
+	final_velocity = last_moving_direction.normalized() * acceleration * speed;
+	
+	vel = move_and_slide(final_velocity, Vector3.UP);
+	velocity = vel;	
+	return vel;
 
 #####
-# Function: accelerate(direction)
+# Function: deaccelerate()
+#
+# Deaccelerates the entity. Doesn't have to be used outside the Entity class. Used in move()
+# 
+# Returns: -
+#
+####
+func deaccelerate():
+	acceleration_curve_x -= 0.03;
+	
+	if(acceleration_curve_x <= 0):
+		acceleration_curve_x = 0;
+	pass
+
+#####
+# Function: accelerate()
 #
 # Accelerates the entity. Doesn't have to be used outside the Entity class. Used in move()
 # 
 # Returns: -
 #
 ####
-func accelerate(var direction : Vector3):
-	if(direction.length() > 0):
-		acceleration_curve_x += 0.01;
-		if(acceleration_curve_x >= 1):
-			acceleration_curve_x = 1;
-	else:
-		acceleration_curve_x = 0;
+func accelerate():
+	acceleration_curve_x += 0.05;
+	
+	if(acceleration_curve_x >= 1):
+		acceleration_curve_x = 1;
 	pass
 
 #####
@@ -52,3 +74,6 @@ func look_at_smooth(var dir : Vector3, var slerp_speed : float):
 	var quatRot = Quat(self.global_transform.basis).slerp(rot.basis, slerp_speed);
 	self.set_transform(Transform(Quat(self.rotation.x, quatRot.y, self.rotation.z, quatRot.w), self.global_transform.origin))
 	pass
+	
+func get_velocity():
+	return velocity;

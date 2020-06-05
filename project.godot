@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Spatial",
 "class": "Alien",
 "language": "GDScript",
 "path": "res://entities/alien/alien.gd"
@@ -52,6 +52,7 @@ Groups="*res://scripts/groups.gd"
 
 window/size/width=960
 window/size/height=540
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 
 [input]

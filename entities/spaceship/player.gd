@@ -2,15 +2,13 @@ extends Entity
 class_name Player
 
 export(NodePath) var camera_path;
-export(NodePath) var aim_timer_path;
-export(NodePath) var sfx_pew_path;
 
 signal thrust(state);
 signal shoot(direction, invulnerables);
 
 onready var camera : Camera = get_node(camera_path);
-onready var aim_timer : Timer = get_node(aim_timer_path);
-onready var sfx_pew : AudioStreamPlayer = get_node(sfx_pew_path);
+onready var aim_timer : Timer = get_node("aim_timer");
+onready var sfx_pew : AudioStreamPlayer = get_node("pew");
 
 var spaceship : Spaceship;
 var direction : Vector3 = Vector3();
@@ -23,7 +21,7 @@ func _physics_process(delta):
 	handle_shooting();
 		
 	#Look towards where you're going
-	if(rotate_with_mouse == false and velocity.length() > 0):
+	if(rotate_with_mouse == false and direction.length() > 0):
 		self.look_at_smooth(-direction, 0.2);
 		pass
 	pass
@@ -37,24 +35,39 @@ func _physics_process(delta):
 func handle_movement() -> Vector3:
 	direction = Vector3();
 	
+	var is_moving = false;
+	
 	if(Input.is_action_pressed("move_up")):
 		direction.z += -1;
 		direction.x += 2;
+		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_right")):
 		direction.x += 1;
 		direction.z += 2;
+		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_left")):
 		direction.x += -1;
 		direction.z += -2;
+		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_down")):
 		direction.z += 1;
 		direction.x += -2;
+		is_moving = true;
 		pass
 		
-	var velocity = move(direction, spaceship.get_acceleration_curve(), spaceship.get_speed());
+	var moving_direction = direction;
+		
+	if(is_moving):
+		if(aim_timer.time_left <= 0):
+			moving_direction = -get_global_transform().basis.z;
+		accelerate();
+	else:
+		deaccelerate();
+		
+	var velocity = move(moving_direction, spaceship.get_speed(), spaceship.get_acceleration_curve());
 	
 	return velocity;
 
@@ -90,7 +103,7 @@ func handle_shooting():
 #
 ####
 func emit_fire_particle():
-	if(direction.length() > 0):
+	if(get_velocity().length() > 3.5):
 		emit_signal("thrust", true);
 		pass
 	else:
@@ -121,7 +134,7 @@ func raycast_from_mouse():
 func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.connect("thrust", spaceship, "set_thrust_state");
-	self.connect("shoot", spaceship, "_on_host_shoot");
+	#self.connect("shoot", spaceship, "_on_host_shoot");
 	spaceship.connect("has_shot", self, "on_has_shot");
 	pass
 

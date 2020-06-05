@@ -14,7 +14,7 @@ func _ready():
 
 func _process(delta):
 	if(is_firing):
-		self.global_transform.origin += speed * fire_direction;
+		self.global_transform.origin += speed * fire_direction * (delta * 50);
 		pass
 	pass
 
@@ -38,13 +38,17 @@ func _on_laser_00_body_entered(body):
 			
 	var instance = self.hit_particle.instance();
 	instance.set_emitting(true);
-	#instance.look_at(self.fire_direction, Vector3.UP);
-	instance.global_transform.origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y, self.global_transform.origin.z);
+	#instance.look_at(self.fire_direction, Vector3.UP)
 	#instance.rotation_degrees.y = self.rotation_degrees.y
 	get_tree().get_root().add_child(instance);
+	instance.global_transform.origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y, self.global_transform.origin.z);
 	
 	if(body.has_method("on_hit")):
 		body.on_hit();
 		
 	queue_free();
+	pass
+
+func _on_death_timer_timeout():
+	#queue_free();
 	pass

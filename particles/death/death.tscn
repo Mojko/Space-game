@@ -1,0 +1,167 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://particles/death/death.gd" type="Script" id=1]
+[ext_resource path="res://audio/sfx/explosion.wav" type="AudioStream" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_color = Color( 0.054902, 0.054902, 0.054902, 1 )
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.8718 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_unshaded = true
+
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="Curve" id=10]
+max_value = 100.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.983029, 100 ), 349.001, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.975207, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_unshaded = true
+albedo_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+
+[sub_resource type="CubeMesh" id=18]
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="Curve" id=17]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.975207, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_unshaded = true
+flags_no_depth_test = true
+albedo_color = Color( 1, 1, 1, 0.490196 )
+
+[sub_resource type="CubeMesh" id=14]
+size = Vector3( 1, 1, 1 )
+
+[node name="death" type="Spatial"]
+script = ExtResource( 1 )
+particles_paths = [ NodePath("hit4"), NodePath("hit5"), NodePath("hit7"), NodePath("hit6") ]
+death_sfx_path = NodePath("audio")
+
+[node name="hit2" type="CPUParticles" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.32921, 0, 0 )
+visible = false
+material_override = SubResource( 1 )
+cast_shadow = 0
+emitting = false
+amount = 40
+lifetime = 0.69
+one_shot = true
+speed_scale = 0.3
+explosiveness = 0.17
+mesh = SubResource( 2 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4.0
+angular_velocity = 0.037037
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.4
+scale_amount_curve = SubResource( 3 )
+
+[node name="hit4" type="CPUParticles" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.32921, 0, 0 )
+material_override = SubResource( 7 )
+cast_shadow = 0
+emitting = false
+amount = 50
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 12 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+angular_velocity = 0.037037
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.4
+scale_amount_curve = SubResource( 6 )
+
+[node name="hit5" type="CPUParticles" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.32921, 0, 0 )
+material_override = SubResource( 7 )
+cast_shadow = 0
+emitting = false
+amount = 150
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 9 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 6.0
+damping_curve = SubResource( 10 )
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.4
+scale_amount_curve = SubResource( 11 )
+
+[node name="hit7" type="CPUParticles" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.32921, 0, 0 )
+material_override = SubResource( 15 )
+cast_shadow = 0
+emitting = false
+amount = 70
+lifetime = 2.0
+explosiveness = 1.0
+mesh = SubResource( 18 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_align_y = true
+flag_rotate_y = true
+spread = 180.0
+gravity = Vector3( 0, -2, 0 )
+initial_velocity = 2.0
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.4
+scale_amount_curve = SubResource( 17 )
+
+[node name="hit6" type="CPUParticles" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.32921, 0, 0 )
+material_override = SubResource( 13 )
+cast_shadow = 0
+emitting = false
+amount = 140
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 14 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 3.5
+damping_curve = SubResource( 10 )
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.4
+scale_amount_curve = SubResource( 11 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+[connection signal="timeout" from="Timer" to="." method="kill"]

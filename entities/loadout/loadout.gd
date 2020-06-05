@@ -35,10 +35,8 @@ func _on_host_shoot(direction, invulnerables):
 	for i in weapon_slots:
 		if(!i.has_weapon()):
 			continue;
-		
-		var instance = laser_model.instance();
-		get_tree().get_root().add_child(instance);
-		instance.global_transform.origin = i.global_transform.origin;
+			
+		var instance = get_tree().get_root().get_node("game").laser_pool.spawn_laser(i.global_transform.origin);
 		instance.fire(direction, 0.6, invulnerables);
 		pass
 	can_shoot = false;

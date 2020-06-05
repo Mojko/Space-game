@@ -1,5 +1,7 @@
 extends ColorRect
 
+var startX;
+var startY;
 var center;
 var target;
 var minX;
@@ -7,10 +9,15 @@ var minY;
 var maxX;
 var maxY;
 
+func _ready():
+	startX = rect_position.x;
+	startY = rect_position.y;
+
 func _process(delta):
 	if(self.center != null and self.target != null):
 		var difference = center.global_transform.origin - target.global_transform.origin;
-		rect_position = Vector2(90 - ((difference.x + difference.z * 2)) * 2, 80 - ((difference.z - difference.x * 2)) * 2);
+		#rect_position = Vector2(90 - ((difference.x + difference.z * 2)) * 2, 80 - ((difference.z - difference.x * 2)) * 2);
+		rect_position = Vector2(startX - ((difference.x + difference.z * 2)) * 2, startY - ((difference.z - difference.x * 2)) * 2);
 		#print(rect_position);
 		check_bounds();
 	
@@ -39,3 +46,6 @@ func attach(entity):
 func attach_center(entity):
 	self.center = entity;
 	pass
+	
+func get_attached_entity():
+	return self.target;

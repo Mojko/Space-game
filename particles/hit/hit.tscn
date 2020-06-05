@@ -7,25 +7,25 @@ flags_transparent = true
 flags_unshaded = true
 flags_no_depth_test = true
 params_blend_mode = 1
+params_cull_mode = 2
 params_billboard_mode = 2
 params_billboard_keep_scale = true
-albedo_color = Color( 1, 0.937255, 0, 0.568627 )
+albedo_color = Color( 1, 0.945098, 0, 0.423529 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=5]
 size = Vector3( 0.1, 1, 0.1 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
 
 [node name="hit" type="CPUParticles"]
+editor/display_folded = true
 material_override = SubResource( 1 )
 cast_shadow = 0
-emitting = false
 amount = 70
 lifetime = 0.05
-one_shot = true
 explosiveness = 0.17
-mesh = SubResource( 2 )
+mesh = SubResource( 5 )
 flag_align_y = true
 flag_rotate_y = true
 spread = 180.0
