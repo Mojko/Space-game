@@ -5,8 +5,8 @@
 [ext_resource path="res://entities/spaceship/spaceship_noob/acceleration_curve.tres" type="Curve" id=3]
 [ext_resource path="res://particles/fire_particles/fire_particles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/loadout/loadout.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/loadout/loadout.gd" type="Script" id=6]
-[ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://misc/player_shooting_behaviour/player_shooting_behaviour.gd" type="Script" id=7]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.236 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -22,21 +22,27 @@ deacceleration_curve = SubResource( 1 )
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.164873, 1.02092 )
 
 [node name="loadout" parent="." index="3" instance=ExtResource( 5 )]
-script = ExtResource( 6 )
 weapon_slots_path = [ NodePath("weapon_slot1"), NodePath("weapon_slot2"), NodePath("weapon_slot3") ]
-attack_delay_path = NodePath("../attack_delay")
+attack_delay_path = NodePath("attack_delay")
+shooting_behaviour_path = NodePath("player_shooting_behaviour")
 
-[node name="weapon_slot1" parent="loadout" index="0" instance=ExtResource( 7 )]
+[node name="weapon_slot1" parent="loadout" index="0" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.30623 )
 
-[node name="weapon_slot2" parent="loadout" index="1" instance=ExtResource( 7 )]
+[node name="weapon_slot2" parent="loadout" index="1" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.795269, 0, -0.186337 )
 
-[node name="weapon_slot3" parent="loadout" index="2" instance=ExtResource( 7 )]
+[node name="weapon_slot3" parent="loadout" index="2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.831243, 0, -0.186337 )
 
-[node name="attack_delay" type="Timer" parent="." index="4"]
+[node name="player_shooting_behaviour" type="Node" parent="loadout" index="3"]
+editor/display_folded = true
+script = ExtResource( 7 )
+
+[node name="attack_delay" type="Timer" parent="loadout/player_shooting_behaviour" index="0"]
 wait_time = 0.5
-[connection signal="shoot" from="." to="loadout" method="_on_host_shoot"]
-[connection signal="has_shot" from="loadout" to="." method="_on_loadout_has_shot"]
-[connection signal="timeout" from="attack_delay" to="loadout" method="_on_attack_delay_timeout"]
+
+[node name="attack_delay" type="Timer" parent="loadout" index="4"]
+wait_time = 0.5
+[connection signal="timeout" from="loadout/player_shooting_behaviour/attack_delay" to="loadout/player_shooting_behaviour" method="_on_attack_delay_timeout"]
+[connection signal="timeout" from="loadout/attack_delay" to="loadout" method="_on_attack_delay_timeout"]

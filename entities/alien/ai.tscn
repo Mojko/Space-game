@@ -5,7 +5,7 @@
 [ext_resource path="res://entities/alien/alien.tscn" type="PackedScene" id=3]
 [ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/sfx/damage.wav" type="AudioStream" id=5]
-[ext_resource path="res://misc/shoot_timer/shoot_timer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://misc/shooting_system_player/shooting_system_player.tscn" type="PackedScene" id=6]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -33,4 +33,4 @@ shape = SubResource( 1 )
 [node name="hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 
-[node name="shoot_timer" parent="." instance=ExtResource( 6 )]
+[node name="shooting" parent="." instance=ExtResource( 6 )]

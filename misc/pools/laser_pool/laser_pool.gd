@@ -4,11 +4,11 @@ func _ready():
 	expand();
 
 func player_has_spawned(player):
-	player.connect("shoot", self, "on_entity_shoot");
+	player.spaceship.loadout.shooting_behaviour.connect("shoot", self, "on_entity_shoot");
 	pass
 	
-func alien_have_spawned(entity):
-	entity.connect("shoot", self, "on_entity_shoot");
+func alien_have_spawned(alien):
+	alien.alien.loadout.shooting_behaviour.connect("shoot", self, "on_entity_shoot");
 	pass
 
 func on_entity_shoot(from, direction, invulnerables):

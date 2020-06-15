@@ -3,13 +3,14 @@ class_name Player
 
 export(NodePath) var camera_path;
 
+signal hit(who);
 signal thrust(state);
 signal shoot(from, direction, invulnerables);
 
 onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node("aim_timer");
 onready var sfx_pew : AudioStreamPlayer = get_node("pew");
-onready var shoot_timer : Timer = get_node("shoot_timer");
+onready var shooting : Node = get_node("shooting");
 
 var spaceship : Spaceship;
 var direction : Vector3 = Vector3();
@@ -88,7 +89,7 @@ func handle_movement() -> Vector3:
 func handle_shooting():
 	if(Input.is_action_pressed("mouse_left")):
 		
-		var result = raycast_from_mouse();
+		var result = RayCastHelper.raycast_from_mouse(camera);
 		
 		rotate_with_mouse = true;
 		if(result.has('position')):
@@ -96,22 +97,8 @@ func handle_shooting():
 			self.look_at_smooth(aim_direction, 1);
 			
 			aim_timer.start();
-			shoot(aim_direction);
-		pass
-	pass
-	
-func shoot(aim_direction):
-	if(shoot_timer.is_finished()):
-		
-		for i in 360:
-			emit_signal("shoot", self, Vector3(cos(i), 0, sin(i)), [Groups.Player]);
-			pass
-		
-#		for weapon in spaceship.loadout.get_loadout():
-#			if(weapon.has_weapon() and shoot_timer.can_shoot()):
-#				emit_signal("shoot", self, -Vector3(aim_direction.x, 0, aim_direction.z), [Groups.Player]);
-		shoot_timer.start();
-
+			spaceship.loadout.shooting_behaviour.shoot(aim_direction);
+			
 #####
 # Function: emit_fire_particle()
 #
@@ -128,21 +115,7 @@ func emit_fire_particle():
 		emit_signal("thrust", false);
 	pass
 
-#####
-# Function: raycast_from_mouse()
-# 
-# Returns: The collisionshape that the raycast manages to hit (aka the result)
-#
-####
-func raycast_from_mouse():
-	var from : Vector3 = camera.project_ray_origin(get_viewport().get_mouse_position());
-	var to : Vector3 = from + camera.project_ray_normal(get_viewport().get_mouse_position()) * 1000;
-	var space_state : PhysicsDirectSpaceState = get_world().get_direct_space_state();
-	var result : Dictionary = space_state.intersect_ray(from, to, [], 0x80000, false, true);
-	
-	return result;
-
-# Function: equip_spaceship()
+# Function: equip_spaceship(spaceship)
 # 
 # Connects a spaceship to the player
 #
@@ -153,6 +126,17 @@ func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.connect("thrust", spaceship, "set_thrust_state");
 	spaceship.connect("has_shot", self, "on_has_shot");
+	pass
+
+# Function: on_hit()
+# 
+# Ran when the player is hit by bullet
+#
+# Returns: -
+#
+####
+func on_hit():
+	emit_signal("hit", self);
 	pass
 
 #####

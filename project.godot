@@ -53,6 +53,8 @@ config/icon="res://Default/icon.png"
 Strings="*res://scripts/strings.gd"
 Weapons="*res://entities/loadout/weapons.gd"
 Groups="*res://scripts/groups.gd"
+Paths="*res://scripts/paths.gd"
+RayCastHelper="*res://scripts/raycast.gd"
 
 [display]
 

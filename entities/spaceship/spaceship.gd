@@ -6,11 +6,11 @@ export(float, 0, 1000, 0.01) var speed;
 export(Curve) var acceleration_curve;
 export(Curve) var deacceleration_curve;
 
-signal shoot(direction, invulnerables);
-signal has_shot();
-
 onready var fire_particles = get_node("fire_particles");
 onready var loadout = get_node("loadout");
+onready var shooting_behaviour = get_node("player_shooting_behaviour");
+
+
 
 func set_thrust_state(state):
 	fire_particles.emit(state);
@@ -26,11 +26,3 @@ func get_deacceleration_curve() -> Curve:
 
 func get_speed() -> float:
 	return speed;
-
-func _on_host_shoot(direction, invulnerables):
-	emit_signal("shoot", direction, invulnerables);
-	pass
-	
-func _on_loadout_has_shot():
-	emit_signal("has_shot");
-	pass

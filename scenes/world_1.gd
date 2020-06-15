@@ -1,7 +1,7 @@
 extends Spatial
 
-export(NodePath) var minimap_path;
+onready var player = get_node("player");
+onready var laser_pool = get_node("pools/laser_pool");
 
-export(PackedScene) var death_particles;
-
-onready var minimap = get_node(minimap_path);
+func _ready():
+	player.shooting_system.connect("shoot", laser_pool, "on_entity_shoot");

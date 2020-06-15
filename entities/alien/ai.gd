@@ -12,9 +12,9 @@ signal shoot(direction, invulnerables);
 signal death(entity);
 
 onready var sfx_hurt = get_node("hurt");
-onready var shoot_timer = get_node("shoot_timer");
+onready var shooting = get_node("shooting");
 
-var state = State.ATTACK;
+var state = State.IDLE;
 var target : Entity;
 var speed : float = 2;
 var alien : Alien;
@@ -41,7 +41,7 @@ func _process(delta):
 	pass
 	
 func handle_idle():
-	self.target = get_target_by(TargetRangeType.ATTACK);
+	update_state_changing();
 	pass
 	
 func handle_moving():
@@ -49,6 +49,8 @@ func handle_moving():
 	pass
 
 func handle_chasing():
+	update_state_changing();
+	
 	if(target != null):
 		var look_dir = global_transform.origin - target.global_transform.origin;
 		move_and_slide(-look_dir.normalized() * speed);
@@ -57,6 +59,8 @@ func handle_chasing():
 	pass
 
 func handle_attacking():
+	update_state_changing();
+	
 	if(target != null):
 		var look_dir = global_transform.origin - target.global_transform.origin;
 		look_at_smooth(look_dir, 0.2);
@@ -68,13 +72,36 @@ func handle_attacking():
 			pass
 		pass
 	pass
+	
+func update_state_changing():
+	var targets = get_tree().get_nodes_in_group("friendly");
+	
+	for target in targets:
+		if(in_chasing_range(target) and state != State.CHASING):
+			change_state(State.CHASING);
+			
+		if(in_attack_range(target) and state != State.ATTACK):
+			change_state(State.ATTACK);
+		pass
+	
+	
+func change_state(state):
+	var text;
+	if(state == State.CHASING): text = "CHASING";
+	if(state == State.IDLE): text = "IDLE"
+	if(state == State.MOVING): text = "MOVING";
+	if(state == State.ATTACK): text = "ATTACK";
+
+	print("Changed state to (", text, ")");
+	self.state = state;
 
 func shoot(aim_direction):
-	if(shoot_timer.is_finished() and rand_range(0, 10) <= 1):
+	if(shooting.can_shoot() and rand_range(0, 10) <= 1):
+		shooting.shoot_ping();
+		
 		for weapon in alien.loadout.get_loadout():
-			if(weapon.has_weapon() and shoot_timer.can_shoot()):
+			if(weapon.has_weapon()):
 				emit_signal("shoot", weapon, aim_direction, [Groups.Enemy]);
-		shoot_timer.start();
 	
 func equip_alien(var alien : Alien):
 	self.alien = alien;
@@ -90,7 +117,11 @@ func on_hit():
 		queue_free();
 	
 func in_attack_range(var object : Spatial) -> bool:
-	return object.global_transform.origin.distance_to(self.global_transform.origin) < 4;
+	return object.global_transform.origin.distance_to(self.global_transform.origin) < 16;
+	
+func in_chasing_range(var object : Spatial) -> bool:
+	return object.global_transform.origin.distance_to(self.global_transform.origin) < 32 and object.global_transform.origin.distance_to(self.global_transform.origin) > 16;
+
 
 func get_target_by(var type) -> Spatial:
 	var targets = get_tree().get_nodes_in_group("friendly");

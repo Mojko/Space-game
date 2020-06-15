@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/minimap/blip.gd" type="Script" id=1]
+[ext_resource path="res://ui/minimap/blip.png" type="Texture" id=1]
+[ext_resource path="res://ui/minimap/blip.gd" type="Script" id=2]
 
-[node name="blip_enemy" type="ColorRect"]
+[node name="blip_enemy" type="TextureRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -12,5 +13,5 @@ margin_top = -5.0
 margin_right = 15.0
 margin_bottom = 15.0
 rect_pivot_offset = Vector2( 5, 5 )
-color = Color( 1, 0, 0, 1 )
-script = ExtResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 
 var startX;
 var startY;
