@@ -14,7 +14,7 @@ func shoot(aim_direction):
 	can_shoot = false;
 	timer.start();
 	
-	for weapon_slot in loadout.get_wepaon_slots():
+	for weapon_slot in loadout.get_weapon_slots():
 		if(weapon_slot.has_weapon()):
 			emit_signal("shoot", weapon_slot, -Vector3(aim_direction.x, 0, aim_direction.z), [Groups.Player]);
 

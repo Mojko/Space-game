@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/alien/ai.gd" type="Script" id=1]
 [ext_resource path="res://entities/alien/alien_repository.gd" type="Script" id=2]
-[ext_resource path="res://entities/alien/alien.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/enemy/enemy_01/scenes/alien.tscn" type="PackedScene" id=3]
 [ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=4]
 [ext_resource path="res://audio/sfx/damage.wav" type="AudioStream" id=5]
 [ext_resource path="res://misc/shooting_system_player/shooting_system_player.tscn" type="PackedScene" id=6]

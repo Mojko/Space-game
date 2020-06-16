@@ -28,7 +28,7 @@ func _physics_process(delta):
 		
 	#Look towards where you're going
 	if(rotate_with_mouse == false and direction.length() > 0):
-		self.look_at_smooth(-direction, 0.2);
+		PhysicsHelper.look_at_smooth(self, -direction, 0.2);
 		pass
 	pass
 
@@ -94,7 +94,7 @@ func handle_shooting():
 		rotate_with_mouse = true;
 		if(result.has('position')):
 			var aim_direction = (self.global_transform.origin - result.position).normalized();
-			self.look_at_smooth(aim_direction, 1);
+			PhysicsHelper.look_at_smooth(self, aim_direction, 1);
 			
 			aim_timer.start();
 			spaceship.loadout.shooting_behaviour.shoot(aim_direction);
@@ -135,7 +135,7 @@ func equip_spaceship(var spaceship : Spaceship):
 # Returns: -
 #
 ####
-func on_hit():
+func on_hit(source):
 	emit_signal("hit", self);
 	pass
 

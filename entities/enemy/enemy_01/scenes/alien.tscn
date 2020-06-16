@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://models/alien/alien.dae" type="PackedScene" id=1]
+[ext_resource path="res://entities/enemy/enemy_01/scripts/alien.gd" type="Script" id=2]
+[ext_resource path="res://entities/loadout/loadout.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/alien/equipper.gd" type="Script" id=5]
+
+[node name="alien" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="loadout" parent="." index="2" instance=ExtResource( 3 )]
+weapon_slots_path = [ NodePath("weapon_slot"), NodePath("weapon_slot2") ]
+
+[node name="weapon_slot" parent="loadout" index="0" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67253, 0.0274358, -2.61505 )
+
+[node name="weapon_slot2" parent="loadout" index="1" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733716, 0, -2.50693 )
+
+[node name="equipper" type="Spatial" parent="." index="3"]
+script = ExtResource( 5 )
+loadout_path = NodePath("../loadout")

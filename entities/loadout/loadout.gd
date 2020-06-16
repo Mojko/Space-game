@@ -10,10 +10,8 @@ onready var attack_delay : Timer = get_node(attack_delay_path);
 onready var shooting_behaviour : Node = get_node(shooting_behaviour_path);
 
 var weapon_slots : Array = [];
-var can_shoot : bool;
 
 func _ready():
-	self.can_shoot = true;
 	for i in weapon_slots_path:
 		var node = get_node(i);
 		weapon_slots.append(node);
@@ -26,9 +24,5 @@ func equip_weapon(var index : int, var weapon_type : Dictionary):
 	weapon_slots[index].equip_weapon(weapon_type);
 	pass
 	
-func get_wepaon_slots():
+func get_weapon_slots():
 	return weapon_slots;
-	
-func _on_attack_delay_timeout():
-	can_shoot = true;
-	pass

@@ -8,12 +8,12 @@ func player_has_spawned(player):
 	pass
 	
 func alien_have_spawned(alien):
-	alien.alien.loadout.shooting_behaviour.connect("shoot", self, "on_entity_shoot");
+	alien.connect("spawn_projectile", self, "on_entity_shoot");
 	pass
 
 func on_entity_shoot(from, direction, invulnerables):
 	var instance = spawn_object_from_pool(from.global_transform.origin);
-	instance.fire(direction, 1, invulnerables);
+	instance.fire(from, direction, 1, invulnerables);
 	
 func expand():
 	for i in 3000:

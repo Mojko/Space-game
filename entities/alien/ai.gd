@@ -105,8 +105,6 @@ func shoot(aim_direction):
 	
 func equip_alien(var alien : Alien):
 	self.alien = alien;
-	self.alien.connect("death", self, "_on_alien_death");
-	pass
 	
 func on_hit():
 	alien.health -= 1;

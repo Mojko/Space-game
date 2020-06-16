@@ -10,8 +10,6 @@ onready var fire_particles = get_node("fire_particles");
 onready var loadout = get_node("loadout");
 onready var shooting_behaviour = get_node("player_shooting_behaviour");
 
-
-
 func set_thrust_state(state):
 	fire_particles.emit(state);
 
