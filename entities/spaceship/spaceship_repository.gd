@@ -10,9 +10,10 @@ var spaceship_repository : Array = [];
 func _ready():
 	for i in spaceship_repository_paths:
 		spaceship_repository.append(get_node(i));
+		get_node(i).inactivate();
 		pass
 		
-	player.equip_spaceship(spaceship_repository.front());
+	player.equip_spaceship(spaceship_repository[1]);
 	pass
 
 #func _process(delta):

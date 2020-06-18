@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Space Game"
-run/main_scene="res://scenes/world_1.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/icon="res://Default/icon.png"
 
 [autoload]

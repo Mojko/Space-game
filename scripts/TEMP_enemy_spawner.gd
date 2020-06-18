@@ -3,8 +3,8 @@ extends Spatial
 export(PackedScene) var enemy;
 
 func _ready():
-	var x = 8;
-	var y = 8;
+	var x = 15;
+	var y = 15;
 	
 	for i in x:
 		for j in y:

@@ -4,6 +4,7 @@ signal shoot(from, direction, invulnerables);
 
 onready var loadout : Node = get_parent();
 onready var timer : Timer = get_node("attack_delay");
+onready var sfx_pew : AudioStreamPlayer = get_node("sfx_pew");
 
 var can_shoot : bool = true;
 	
@@ -16,6 +17,7 @@ func shoot(aim_direction):
 	
 	for weapon_slot in loadout.get_weapon_slots():
 		if(weapon_slot.has_weapon()):
+			sfx_pew.play();
 			emit_signal("shoot", weapon_slot, -Vector3(aim_direction.x, 0, aim_direction.z), [Groups.Player]);
 
 func _on_attack_delay_timeout():

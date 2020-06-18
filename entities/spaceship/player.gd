@@ -124,6 +124,7 @@ func emit_fire_particle():
 ####
 func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
+	self.spaceship.activate();
 	self.connect("thrust", spaceship, "set_thrust_state");
 	spaceship.connect("has_shot", self, "on_has_shot");
 	pass
@@ -135,9 +136,9 @@ func equip_spaceship(var spaceship : Spaceship):
 # Returns: -
 #
 ####
-func on_hit(source):
+func hit(source):
+	print("Hit wew");
 	emit_signal("hit", self);
-	pass
 
 #####
 # Function: _on_AimTimer_timeout()

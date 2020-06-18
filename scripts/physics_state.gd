@@ -1,7 +1,10 @@
 extends Node
 class_name PhysicsState
 
-func init(data : Array):
+func enter(data : Array):
+	pass
+	
+func exit():
 	pass
 
 func physics_update(parent : KinematicBody):

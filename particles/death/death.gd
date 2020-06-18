@@ -17,5 +17,6 @@ func emit():
 func kill():
 	for i in particles_paths:
 		get_node(i).set_emitting(false);
+		
 	emit_signal("death", self);
 	death_timer.stop();

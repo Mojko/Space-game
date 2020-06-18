@@ -23,8 +23,9 @@ func alien_have_spawned(entity):
 
 func alien_have_died(entity):
 	var index = 0;
+	
 	for i in blips:
-		if(i.get_attached_entity().name == entity.name):
+		if(i.get_attached_entity() == null or i.get_attached_entity().name == entity.name):
 			blips.remove(index);
 			i.queue_free();
 		index += 1;

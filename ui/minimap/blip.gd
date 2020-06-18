@@ -14,7 +14,12 @@ func _ready():
 	startY = rect_position.y;
 
 func _process(delta):
-	if(self.center != null and self.target != null):
+	
+	if(target != null and !is_instance_valid(target)):
+		print("The minimap blip of enemy still exists after the enemy got freed");
+		target = null;
+	
+	if(self.center != null and self.target != null and is_instance_valid(self.target)):
 		var difference = center.global_transform.origin - target.global_transform.origin;
 		#rect_position = Vector2(90 - ((difference.x + difference.z * 2)) * 2, 80 - ((difference.z - difference.x * 2)) * 2);
 		rect_position = Vector2(startX - ((difference.x + difference.z * 2)) * 2, startY - ((difference.z - difference.x * 2)) * 2);

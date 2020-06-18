@@ -7,7 +7,7 @@ onready var shoot_delay = .get_node("shoot_delay");
 var target;
 var can_shoot : bool = true;
 
-func init(data : Array):
+func enter(data : Array):
 	target = data[0];
 
 func physics_update(parent : KinematicBody):

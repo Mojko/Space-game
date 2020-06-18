@@ -22,5 +22,9 @@ func physics_update(parent):
 func change_state(next_state : String, data : Array):
 #	print("Changed state to (", next_state, ")");
 	var index = state_map.find(next_state);
+	
+	if(active_state != null):
+		active_state.exit();
+		
 	active_state = states[index];
-	active_state.init(data);
+	active_state.enter(data);

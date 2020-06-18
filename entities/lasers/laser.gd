@@ -32,6 +32,8 @@ func fire(from : Spatial, direction : Vector3, speed : float, invulnerables : Ar
 	
 	var nd : Vector3 = self.global_transform.origin - fire_direction;
 	look_at(Vector3(nd.x, 0, nd.z), Vector3.UP);
+	self.rotation.x = 0;
+	self.rotation.z = 0;
 	pass
 
 func _on_laser_00_body_entered(body):

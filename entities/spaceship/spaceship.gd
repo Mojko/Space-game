@@ -24,3 +24,13 @@ func get_deacceleration_curve() -> Curve:
 
 func get_speed() -> float:
 	return speed;
+	
+func inactivate():
+	set_process(false);
+	set_physics_process(false);
+	hide();
+	
+func activate():
+	set_process(true);
+	set_physics_process(true);
+	show();

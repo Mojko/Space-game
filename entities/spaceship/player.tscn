@@ -4,8 +4,8 @@
 [ext_resource path="res://entities/spaceship/spaceship_repository.gd" type="Script" id=2]
 [ext_resource path="res://entities/spaceship/spaceship_noob/spaceship_noob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/spaceship/spaceship_1/spaceship_1.tscn" type="PackedScene" id=4]
-[ext_resource path="res://entities/spaceship/spaceship.gd" type="Script" id=5]
-[ext_resource path="res://audio/sfx/pew.wav" type="AudioStream" id=6]
+[ext_resource path="res://entities/spaceship/spaceship_noob/acceleration_curve.tres" type="Curve" id=5]
+[ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=6]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.236 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -23,15 +23,16 @@ camera_path = NodePath("../camera")
 [node name="spaceship_repository" type="Spatial" parent="."]
 script = ExtResource( 2 )
 player_path = NodePath("..")
-spaceship_repository_paths = [ NodePath("spaceship_noob") ]
+spaceship_repository_paths = [ NodePath("spaceship_noob"), NodePath("spaceship_1") ]
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
 speed = 8.0
 deacceleration_curve = SubResource( 1 )
 
 [node name="spaceship_1" parent="spaceship_repository" instance=ExtResource( 4 )]
-visible = false
-script = ExtResource( 5 )
+health = 100
+speed = 16.0
+acceleration_curve = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
