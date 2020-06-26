@@ -3,7 +3,7 @@ extends PhysicsState
 signal shoot(direction, invulnerables);
 
 onready var shoot_delay = .get_node("shoot_delay");
-onready var attacking_effect = .get_owner().get_node("attacking_effect");
+onready var attacking_effect = .get_owner().get_node("electrical_shield");
 
 var target;
 var can_shoot : bool = true;

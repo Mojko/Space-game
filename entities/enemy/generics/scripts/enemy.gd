@@ -1,6 +1,6 @@
 extends KinematicBody
 
-signal spawn_projectile(from, direction, invulnerables);
+signal shoot(projectile_type, from, direction, invulnerables);
 signal hit(entity);
 signal death(entity);
 
@@ -65,4 +65,4 @@ func _on_attacking_shoot(direction, invulnerables):
 		var weapon_slot_dir = weapon_slot.get_weapon_direction();
 		
 		if(weapon_slot.has_weapon()):
-			emit_signal("spawn_projectile", weapon_slot, weapon_slot.global_transform.basis.z.normalized(), invulnerables);
+			emit_signal("shoot", Projectile.Type.LASER_01, weapon_slot, weapon_slot.global_transform.basis.z.normalized(), invulnerables);

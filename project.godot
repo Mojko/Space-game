@@ -34,10 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/spaceship/player.gd"
 }, {
-"base": "Spatial",
+"base": "Node",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://entities/projectiles/generics/scripts/projectile.gd"
+"path": "res://scripts/projectile_type.gd"
 }, {
 "base": "Spatial",
 "class": "Spaceship",
@@ -75,6 +75,7 @@ Paths="*res://scripts/paths.gd"
 RayCastHelper="*res://scripts/raycast.gd"
 PhysicsHelper="*res://scripts/physics_helper.gd"
 DebugObject="*res://tools/debug_object.tscn"
+Projectile="*res://scripts/projectile_type.gd"
 
 [display]
 

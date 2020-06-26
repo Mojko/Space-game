@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/directional_light.gd" type="Script" id=1]
 [ext_resource path="res://Default/env.tres" type="Environment" id=2]
@@ -12,18 +12,19 @@
 [ext_resource path="res://models/planet_0/render.png" type="Texture" id=10]
 [ext_resource path="res://images/fog.png" type="Texture" id=11]
 [ext_resource path="res://misc/world/world.gd" type="Script" id=12]
-[ext_resource path="res://entities/spaceship/player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://misc/spawners/enemy_spawner.tscn" type="PackedScene" id=14]
-[ext_resource path="res://misc/pools/laser_pool/laser_pool.tscn" type="PackedScene" id=15]
-[ext_resource path="res://entities/projectiles/projectile_0_laser/projectile_0_laser.tscn" type="PackedScene" id=16]
-[ext_resource path="res://misc/pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=17]
-[ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=18]
-[ext_resource path="res://misc/pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=19]
-[ext_resource path="res://particles/hit/hit.tscn" type="PackedScene" id=20]
-[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=21]
-[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.gd" type="Script" id=22]
-[ext_resource path="res://particles/gfx_hit_electricity/gfx_hit_electricity.tscn" type="PackedScene" id=23]
-[ext_resource path="res://entities/enemy/enemy_03_flying_saucer/enemy_03_flying_saucer.tscn" type="PackedScene" id=24]
+[ext_resource path="res://entities/enemy/enemy_02_jellyfish/scenes/enemy_02_jellyfish.tscn" type="PackedScene" id=13]
+[ext_resource path="res://entities/spaceship/player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://misc/spawners/enemy_spawner.tscn" type="PackedScene" id=15]
+[ext_resource path="res://misc/pools/laser_pool/laser_pool.tscn" type="PackedScene" id=16]
+[ext_resource path="res://entities/projectiles/projectile_0_laser/projectile_0_laser.tscn" type="PackedScene" id=17]
+[ext_resource path="res://misc/pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=18]
+[ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=19]
+[ext_resource path="res://misc/pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=20]
+[ext_resource path="res://particles/hit/hit.tscn" type="PackedScene" id=21]
+[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=22]
+[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.gd" type="Script" id=23]
+[ext_resource path="res://particles/gfx_hit_electricity/gfx_hit_electricity.tscn" type="PackedScene" id=24]
+[ext_resource path="res://entities/enemy/enemy_03_flying_saucer/enemy_03_flying_saucer.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -46,8 +47,8 @@ script = ExtResource( 1 )
 environment = ExtResource( 2 )
 
 [node name="minimap" parent="." groups=[
-"death_listener",
 "spawn_listener",
+"death_listener",
 ] instance=ExtResource( 3 )]
 minimap_path = NodePath("../../game/minimap/minimap")
 
@@ -153,35 +154,43 @@ texture = ExtResource( 11 )
 
 [node name="world" type="Spatial" parent="."]
 script = ExtResource( 12 )
+enemy_scenes = [ ExtResource( 13 ) ]
+player_path = NodePath("player")
 
-[node name="player" parent="world" instance=ExtResource( 13 )]
+[node name="player" parent="world" instance=ExtResource( 14 )]
 camera_path = NodePath("../../camera")
 
-[node name="enemy_spawner" parent="world" instance=ExtResource( 14 )]
+[node name="enemy_spawner" parent="world" instance=ExtResource( 15 )]
 
 [node name="pools" type="Node" parent="world"]
-editor/display_folded = true
 
 [node name="laser_pool" parent="world/pools" groups=[
-"laser_pool",
 "spawn_listener",
-] instance=ExtResource( 15 )]
-objectToPool = ExtResource( 16 )
+"laser_pool",
+] instance=ExtResource( 16 )]
+objectToPool = ExtResource( 17 )
 
 [node name="gfx_death_pool" parent="world/pools" groups=[
 "spawn_listener",
-] instance=ExtResource( 17 )]
-objectToPool = ExtResource( 18 )
+] instance=ExtResource( 18 )]
+objectToPool = ExtResource( 19 )
 
 [node name="gfx_hit_pool" parent="world/pools" groups=[
 "spawn_listener",
-] instance=ExtResource( 19 )]
-objectToPool = ExtResource( 20 )
+] instance=ExtResource( 20 )]
+objectToPool = ExtResource( 21 )
 
 [node name="gfx_hit_electricity_pool" parent="world/pools" groups=[
 "spawn_listener",
-] instance=ExtResource( 21 )]
-script = ExtResource( 22 )
-objectToPool = ExtResource( 23 )
+] instance=ExtResource( 22 )]
+script = ExtResource( 23 )
+objectToPool = ExtResource( 24 )
 
-[node name="enemy_03_flying_saucer" parent="world" instance=ExtResource( 24 )]
+[node name="enemy_03_flying_saucer" parent="world" instance=ExtResource( 25 )]
+[connection signal="spawn_gfx_death" from="world" to="world/pools/gfx_death_pool" method="_on_world_spawn_gfx_death"]
+[connection signal="spawn_gfx_hit" from="world" to="world/pools/gfx_hit_pool" method="_on_world_spawn_gfx_hit"]
+[connection signal="spawn_gfx_hit_electricity" from="world" to="world/pools/gfx_hit_electricity_pool" method="_on_world_spawn_gfx_hit_electricity"]
+[connection signal="spawn_laser_projectile" from="world" to="world/pools/laser_pool" method="_on_world_spawn_laser_projectile"]
+[connection signal="hit" from="world/player" to="world" method="on_entity_hit"]
+[connection signal="hit_electricity" from="world/player" to="world" method="on_entity_hit_electricity"]
+[connection signal="shoot" from="world/player" to="world" method="on_entity_shoot"]

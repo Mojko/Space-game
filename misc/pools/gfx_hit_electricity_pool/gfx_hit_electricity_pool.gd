@@ -3,13 +3,10 @@ extends ObjectPool
 func _ready():
 	expand(25);
 
-func player_has_spawned(player):
-	player.connect("hit_electricity", self, "on_electricity_hit");
-	
-func on_electricity_hit(target):
-	var instance = spawn_object_from_pool(target.global_transform.origin);
+func _on_world_spawn_gfx_hit_electricity(me):
+	var instance = spawn_object_from_pool(me.global_transform.origin);
 	instance.emit();
-	instance.follow(target);
+	instance.follow(me);
 	
 func expand(size):
 	for i in size:

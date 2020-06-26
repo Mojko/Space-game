@@ -1,5 +1,4 @@
 extends Spatial
-class_name Projectile
 
 export(PackedScene) var hit_particle;
 
@@ -38,8 +37,11 @@ func fire(from : Spatial, direction : Vector3, speed : float, invulnerables : Ar
 	pass
 
 func _on_laser_00_body_entered(body):
-	if(invulnerables == null):
+	if(!is_firing):
 		return
+		
+	if(!invulnerables):
+		print("INVULNERABLES ARE NULL: ", invulnerables);
 		
 	for i in invulnerables:
 		if(body.is_in_group(i)):

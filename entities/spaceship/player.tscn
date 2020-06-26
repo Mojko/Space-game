@@ -55,4 +55,5 @@ wait_time = 0.25
 
 [node name="sfx_pew" type="AudioStreamPlayer" parent="player_shooting_behaviour"]
 [connection signal="timeout" from="aim_timer" to="." method="_on_AimTimer_timeout"]
+[connection signal="shoot" from="player_shooting_behaviour" to="." method="_on_player_shooting_behaviour_shoot"]
 [connection signal="timeout" from="player_shooting_behaviour/attack_delay" to="player_shooting_behaviour" method="_on_attack_delay_timeout"]
