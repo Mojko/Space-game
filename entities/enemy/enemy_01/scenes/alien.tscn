@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://models/alien/alien.dae" type="PackedScene" id=1]
-[ext_resource path="res://entities/enemy/enemy_01/scripts/alien.gd" type="Script" id=2]
+[ext_resource path="res://entities/enemy/generics/scripts/alien.gd" type="Script" id=2]
 [ext_resource path="res://entities/loadout/loadout.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/alien/equipper.gd" type="Script" id=5]

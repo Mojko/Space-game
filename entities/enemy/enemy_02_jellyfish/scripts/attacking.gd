@@ -20,7 +20,7 @@ func physics_update(parent : KinematicBody):
 	PhysicsHelper.look_at_smooth(parent, look_dir, 0.2);
 	
 	if(can_shoot and in_range_for_attack(parent)):
-		target.hit(.get_owner());
+		target.hit_electricity(.get_owner());
 		#.emit_signal("shoot", -look_dir.normalized(), [Groups.Enemy]);
 		shoot_delay.start();
 		can_shoot = false;
@@ -38,4 +38,4 @@ func in_range_for_chase(parent : KinematicBody):
 	return parent.global_transform.origin.distance_to(target.global_transform.origin) > 12;
 	
 func in_range_for_attack(parent : KinematicBody):
-	return parent.global_transform.origin.distance_to(target.global_transform.origin) < 6;
+	return parent.global_transform.origin.distance_to(target.global_transform.origin) < 10;

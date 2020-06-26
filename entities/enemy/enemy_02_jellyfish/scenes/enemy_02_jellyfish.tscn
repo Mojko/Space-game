@@ -1,39 +1,18 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://entities/enemy/enemy_02_jellyfish/scripts/enemy_02.gd" type="Script" id=1]
+[ext_resource path="res://entities/enemy/generics/scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/enemy/enemy_02_jellyfish/scenes/jellyfish_model.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/physics_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/enemy/enemy_02_jellyfish/scripts/chasing.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemy/enemy_02_jellyfish/scripts/attacking.gd" type="Script" id=5]
-[ext_resource path="res://models/enemy_02_jellyfish/lightning_aura.png" type="Texture" id=6]
-[ext_resource path="res://entities/enemy/enemy_02_jellyfish/scripts/attacking_effect.gd" type="Script" id=7]
-[ext_resource path="res://audio/sfx/lightning/lightning_2.wav" type="AudioStream" id=8]
+[ext_resource path="res://particles/electrical_shield/electrical_shield.tscn" type="PackedScene" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.37508, 2.66632, 2.19696 )
 
-[sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 0, 1, 0.929412, 0.427451 )
-albedo_texture = ExtResource( 6 )
-
-[sub_resource type="QuadMesh" id=3]
-
-[sub_resource type="Curve" id=4]
-min_value = -360.0
-max_value = 360.0
-_data = [ Vector2( 0, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -263.736 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0, 0 ), 0.0, 1.88917, 0, 1, Vector2( 0.529334, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.12465, 0.0, 1, 0 ]
-
 [node name="enemy_02_jellyfish" type="KinematicBody" groups=[
 "enemy",
+"damageable",
 ]]
 script = ExtResource( 1 )
 
@@ -55,25 +34,5 @@ script = ExtResource( 5 )
 
 [node name="shoot_delay" type="Timer" parent="state_machine/attacking"]
 
-[node name="attacking_effect" type="CPUParticles" parent="."]
-transform = Transform( 0.0710223, 4.77458, 6.41859, -4.62151, 5.26382, -3.86444, -6.52967, -3.67364, 2.80495, -0.157603, 0.644912, 0.0656275 )
-visible = false
-material_override = SubResource( 2 )
-amount = 3
-lifetime = 0.5
-mesh = SubResource( 3 )
-flag_align_y = true
-flag_rotate_y = true
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 0.0
-angular_velocity = 1.06134e-005
-angle_curve = SubResource( 4 )
-scale_amount_curve = SubResource( 5 )
-script = ExtResource( 7 )
-
-[node name="sfx_buzz" type="AudioStreamPlayer" parent="attacking_effect"]
-stream = ExtResource( 8 )
-volume_db = -10.0
+[node name="electrical_shield" parent="." instance=ExtResource( 6 )]
 [connection signal="timeout" from="state_machine/attacking/shoot_delay" to="state_machine/attacking" method="_on_shoot_delay_timeout"]

@@ -1,11 +1,8 @@
 extends Spatial
 
 export(Array, NodePath) var weapon_slots_path = [];
-export(NodePath) var shooting_behaviour_path;
 
 signal shoot(from, direction, invulnerables);
-
-onready var shooting_behaviour : Node = get_node(shooting_behaviour_path);
 
 var weapon_slots : Array = [];
 

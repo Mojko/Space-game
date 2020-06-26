@@ -13,7 +13,7 @@ func _ready():
 		get_node(i).inactivate();
 		pass
 		
-	player.equip_spaceship(spaceship_repository[1]);
+	player.equip_spaceship(spaceship_repository[2]);
 	pass
 
 #func _process(delta):

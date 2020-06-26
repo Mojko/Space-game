@@ -18,7 +18,7 @@ func add_to_pool(object : Spatial) -> void:
 	
 func spawn_object_from_pool(position : Vector3) -> Spatial:
 	if(pool.size() <= 30 or pool.front() == null):
-		expand();
+		expand(50);
 		pass
 		
 	var instance : Spatial = pool.pop_front();
@@ -27,5 +27,5 @@ func spawn_object_from_pool(position : Vector3) -> Spatial:
 	instance.show();
 	return instance;
 	
-func expand():
-	print("This has to be overriden by child");
+func expand(size):
+	print("This has to be overriden by child ", self);

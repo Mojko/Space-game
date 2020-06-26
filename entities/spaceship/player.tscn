@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/spaceship/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/spaceship/spaceship_repository.gd" type="Script" id=2]
 [ext_resource path="res://entities/spaceship/spaceship_noob/spaceship_noob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/spaceship/spaceship_1/spaceship_1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/spaceship/spaceship_noob/acceleration_curve.tres" type="Curve" id=5]
-[ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=6]
+[ext_resource path="res://entities/spaceship/spaceship_2/spaceship_2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=7]
+[ext_resource path="res://misc/player_shooting_behaviour/player_shooting_behaviour.gd" type="Script" id=8]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.236 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -23,7 +25,7 @@ camera_path = NodePath("../camera")
 [node name="spaceship_repository" type="Spatial" parent="."]
 script = ExtResource( 2 )
 player_path = NodePath("..")
-spaceship_repository_paths = [ NodePath("spaceship_noob"), NodePath("spaceship_1") ]
+spaceship_repository_paths = [ NodePath("spaceship_noob"), NodePath("spaceship_1"), NodePath("spaceship_2") ]
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
 speed = 8.0
@@ -34,12 +36,23 @@ health = 100
 speed = 16.0
 acceleration_curve = ExtResource( 5 )
 
+[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 6 )]
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 2 )
 
 [node name="pew" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 
 [node name="aim_timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="player_shooting_behaviour" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="attack_delay" type="Timer" parent="player_shooting_behaviour"]
+wait_time = 0.25
+
+[node name="sfx_pew" type="AudioStreamPlayer" parent="player_shooting_behaviour"]
 [connection signal="timeout" from="aim_timer" to="." method="_on_AimTimer_timeout"]
+[connection signal="timeout" from="player_shooting_behaviour/attack_delay" to="player_shooting_behaviour" method="_on_attack_delay_timeout"]

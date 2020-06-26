@@ -2,7 +2,7 @@ extends Node
 
 signal shoot(from, direction, invulnerables);
 
-onready var loadout : Node = get_parent();
+onready var loadout : Node = get_parent().spaceship.loadout;
 onready var timer : Timer = get_node("attack_delay");
 onready var sfx_pew : AudioStreamPlayer = get_node("sfx_pew");
 

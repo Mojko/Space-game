@@ -4,13 +4,13 @@ class_name Player
 export(NodePath) var camera_path;
 
 signal hit(who);
+signal hit_electricity(who);
 signal thrust(state);
 signal shoot(from, direction, invulnerables);
 
 onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node("aim_timer");
-onready var sfx_pew : AudioStreamPlayer = get_node("pew");
-onready var shooting : Node = get_node("shooting");
+onready var shooting_behaviour : Node = get_node("player_shooting_behaviour");
 
 var spaceship : Spaceship;
 var direction : Vector3 = Vector3();
@@ -25,7 +25,7 @@ func _physics_process(delta):
 	var velocity = handle_movement();
 	emit_fire_particle();
 	handle_shooting();
-		
+	
 	#Look towards where you're going
 	if(rotate_with_mouse == false and direction.length() > 0):
 		PhysicsHelper.look_at_smooth(self, -direction, 0.2);
@@ -97,7 +97,7 @@ func handle_shooting():
 			PhysicsHelper.look_at_smooth(self, aim_direction, 1);
 			
 			aim_timer.start();
-			spaceship.loadout.shooting_behaviour.shoot(aim_direction);
+			shooting_behaviour.shoot(aim_direction);
 			
 #####
 # Function: emit_fire_particle()
@@ -126,10 +126,9 @@ func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.spaceship.activate();
 	self.connect("thrust", spaceship, "set_thrust_state");
-	spaceship.connect("has_shot", self, "on_has_shot");
 	pass
 
-# Function: on_hit()
+# Function: on_hit(source)
 # 
 # Ran when the player is hit by bullet
 #
@@ -137,8 +136,18 @@ func equip_spaceship(var spaceship : Spaceship):
 #
 ####
 func hit(source):
-	print("Hit wew");
 	emit_signal("hit", self);
+	
+	
+# Function: on_hit_electricity(source)
+# 
+# Ran when the player is hit by a electricity source
+#
+# Returns: -
+#
+####
+func hit_electricity(source):
+	emit_signal("hit_electricity", self);
 
 #####
 # Function: _on_AimTimer_timeout()
@@ -153,6 +162,3 @@ func _on_AimTimer_timeout():
 	rotate_with_mouse = false;
 	pass
 	
-func on_has_shot():
-	sfx_pew.play();
-	pass

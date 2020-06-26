@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://entities/enemy/enemy_01/scripts/enemy_01.gd" type="Script" id=1]
+[ext_resource path="res://entities/enemy/generics/scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/enemy/enemy_01/scenes/alien.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/physics_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/enemy/enemy_01/scripts/chasing.gd" type="Script" id=4]

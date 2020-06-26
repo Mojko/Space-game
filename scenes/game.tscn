@@ -1,31 +1,36 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/directional_light.gd" type="Script" id=1]
 [ext_resource path="res://Default/env.tres" type="Environment" id=2]
 [ext_resource path="res://ui/minimap/minimap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/camera.gd" type="Script" id=4]
-[ext_resource path="res://entities/spaceship/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/3d/3d_gui.tscn" type="PackedScene" id=4]
+[ext_resource path="res://misc/cameras/camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/ground/ground.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/ground/ground.gd" type="Script" id=7]
-[ext_resource path="res://scripts/TEMP_enemy_spawner.gd" type="Script" id=8]
-[ext_resource path="res://entities/enemy/enemy_02_jellyfish/scenes/enemy_02_jellyfish.tscn" type="PackedScene" id=9]
-[ext_resource path="res://particles/stars/stars_layer_1.tscn" type="PackedScene" id=10]
-[ext_resource path="res://particles/stars/stars_layer_2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://environment/planet_0/planet.tscn" type="PackedScene" id=12]
-[ext_resource path="res://environment/planet_0/planet.gd" type="Script" id=13]
-[ext_resource path="res://particles/fog.tscn" type="PackedScene" id=14]
-[ext_resource path="res://models/planet_0/render.png" type="Texture" id=15]
-[ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=16]
-[ext_resource path="res://misc/pools/laser_pool/laser_pool.tscn" type="PackedScene" id=17]
-[ext_resource path="res://misc/pools/laser_pool/laser_pool.gd" type="Script" id=18]
-[ext_resource path="res://entities/lasers/laser_00/laser_00.tscn" type="PackedScene" id=19]
-[ext_resource path="res://misc/pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=20]
-[ext_resource path="res://misc/pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=21]
-[ext_resource path="res://particles/hit/hit.tscn" type="PackedScene" id=22]
+[ext_resource path="res://particles/stars/stars_layer_1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://particles/stars/stars_layer_2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://particles/fog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://models/planet_0/render.png" type="Texture" id=10]
+[ext_resource path="res://images/fog.png" type="Texture" id=11]
+[ext_resource path="res://misc/world/world.gd" type="Script" id=12]
+[ext_resource path="res://entities/spaceship/player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://misc/spawners/enemy_spawner.tscn" type="PackedScene" id=14]
+[ext_resource path="res://misc/pools/laser_pool/laser_pool.tscn" type="PackedScene" id=15]
+[ext_resource path="res://entities/projectiles/projectile_0_laser/projectile_0_laser.tscn" type="PackedScene" id=16]
+[ext_resource path="res://misc/pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=17]
+[ext_resource path="res://particles/death/death.tscn" type="PackedScene" id=18]
+[ext_resource path="res://misc/pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=19]
+[ext_resource path="res://particles/hit/hit.tscn" type="PackedScene" id=20]
+[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=21]
+[ext_resource path="res://misc/pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.gd" type="Script" id=22]
+[ext_resource path="res://particles/gfx_hit_electricity/gfx_hit_electricity.tscn" type="PackedScene" id=23]
+[ext_resource path="res://entities/enemy/enemy_03_flying_saucer/enemy_03_flying_saucer.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
-albedo_color = Color( 1, 0, 0, 0.560784 )
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+albedo_color = Color( 0.443137, 0.419608, 0.737255, 1 )
+metallic_specular = 0.38
 
 [node name="game" type="Spatial"]
 
@@ -46,72 +51,137 @@ environment = ExtResource( 2 )
 ] instance=ExtResource( 3 )]
 minimap_path = NodePath("../../game/minimap/minimap")
 
-[node name="camera" type="Camera" parent="."]
-transform = Transform( 0.503961, 0.553087, -0.663414, 0.00546828, 0.766025, 0.642788, 0.863709, -0.327568, 0.383022, -13.3688, 12.8765, 7.313 )
-projection = 1
-current = true
-size = 20.0
-far = 139.0
-script = ExtResource( 4 )
-target = NodePath("../../world_1/player")
+[node name="3d_gui" parent="." instance=ExtResource( 4 )]
+camera_path = NodePath("../camera")
 
-[node name="player" parent="." instance=ExtResource( 5 )]
-collision_layer = 2
+[node name="camera" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.504307, 0.553978, -0.662407, 0.00530393, 0.765095, 0.643896, 0.863508, -0.328234, 0.382904, -13.1948, 12.7362, 7.38888 )
+fov = 60.0
+near = 3.78
+far = 242.4
+target = NodePath("../world/player")
 
 [node name="ground" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.253612, 0 )
-script = ExtResource( 7 )
-chase_path = NodePath("../player")
-
-[node name="enemies" type="Spatial" parent="."]
-script = ExtResource( 8 )
-enemy = ExtResource( 9 )
+chase_path = NodePath("../world/player")
 
 [node name="environment" type="Spatial" parent="."]
 editor/display_folded = true
 
-[node name="stars_layer_1" parent="environment" instance=ExtResource( 10 )]
+[node name="stars_layer_1" parent="environment" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0, 0 )
+amount = 1500
+lifetime = 10.0
+preprocess = 32.91
+emission_sphere_radius = 100.0
+flag_disable_z = true
 
-[node name="stars_layer_2" parent="environment" instance=ExtResource( 11 )]
+[node name="stars_layer_2" parent="environment" instance=ExtResource( 8 )]
+transform = Transform( -0.348196, -0.781535, -0.517651, 0.504619, -0.621639, 0.599103, -0.790012, -0.0526111, 0.61083, 0, -8.76161, 0 )
+visible = false
 angular_velocity = -0.866026
 
-[node name="planet" parent="environment" instance=ExtResource( 12 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -9.38649, -11.0745, -22.2156 )
-script = ExtResource( 13 )
-
-[node name="fog" parent="environment" instance=ExtResource( 14 )]
+[node name="fog" parent="environment" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5384, -32.9825, -24.6432 )
-lifetime = 600.0
+visible = false
+lifetime = 10.0
 preprocess = 600.0
+flag_align_y = true
+flag_rotate_y = true
 scale_amount_curve = null
 
-[node name="Spatial" type="Spatial" parent="environment"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9984, -17.6839, -12.1334 )
-
-[node name="Sprite3D" type="Sprite3D" parent="environment/Spatial"]
-transform = Transform( 3.50916, 1.40343, -3.27355, 0.0940514, 4.55737, 2.05464, 3.56047, -1.50359, 3.17211, -0.913471, 1.34854, 2.85498 )
+[node name="planet" type="Sprite3D" parent="environment"]
+editor/display_folded = true
+transform = Transform( 2.80733, 1.12274, -2.61885, 0.0752411, 3.64589, 1.64371, 2.84838, -1.20287, 2.53769, 18.0849, -13.2619, 18.9207 )
 material_override = SubResource( 1 )
 shaded = true
 double_sided = false
-texture = ExtResource( 15 )
+texture = ExtResource( 10 )
 
-[node name="death" parent="." instance=ExtResource( 16 )]
+[node name="Sprite3D5" type="Sprite3D" parent="environment/planet"]
+transform = Transform( 0.8422, 0.854512, -0.0150479, 0.336823, -0.360861, -0.729179, -0.785655, 0.761307, -0.328743, 0.136216, 1.23886, -0.332262 )
+modulate = Color( 0.254902, 0.196078, 0.494118, 0.768627 )
+texture = ExtResource( 11 )
 
-[node name="pools" type="Node" parent="."]
+[node name="fog2" type="Spatial" parent="environment"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12467, -16.5148, -20.2681 )
 
-[node name="laser_pool" parent="pools" groups=[
+[node name="Sprite3D" type="Sprite3D" parent="environment/fog2"]
+transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="environment/fog2"]
+transform = Transform( -1.47067, 4.42696, 2.51565, 5.54085, -0.118832, 1.53259, 1.77092, 4.04819, -2.70604, 4.47927, -11.4699, -12.5448 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="environment/fog2"]
+transform = Transform( 5.45748, -2.42988, -0.372132, 0.0726307, 1.49772, -3.87307, 2.49212, 5.27755, 0.927809, 0, 0, 27.9847 )
+modulate = Color( 0.301961, 0.321569, 0.827451, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="environment/fog2"]
+transform = Transform( 0.455383, 3.54757, 3.2116, 4.96266, -2.92231, 1.12193, 3.34136, 3.85679, -2.10402, 25.1272, -12.0241, 6.33648 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="fog3" type="Spatial" parent="environment"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.3907, -16.5148, 4.16251 )
+
+[node name="Sprite3D" type="Sprite3D" parent="environment/fog3"]
+transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="environment/fog3"]
+transform = Transform( -1.47067, 4.42696, 2.51565, 5.54085, -0.118832, 1.53259, 1.77092, 4.04819, -2.70604, 4.47927, -11.4699, -12.5448 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="environment/fog3"]
+transform = Transform( 5.45748, -2.42988, -0.372132, 0.0726307, 1.49772, -3.87307, 2.49212, 5.27755, 0.927809, 0, 0, 27.9847 )
+modulate = Color( 0.301961, 0.321569, 0.827451, 1 )
+texture = ExtResource( 11 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="environment/fog3"]
+transform = Transform( 0.455383, 3.54757, 3.2116, 4.96266, -2.92231, 1.12193, 3.34136, 3.85679, -2.10402, 25.1272, -12.0241, 6.33648 )
+modulate = Color( 0.701961, 0.627451, 1, 1 )
+texture = ExtResource( 11 )
+
+[node name="world" type="Spatial" parent="."]
+script = ExtResource( 12 )
+
+[node name="player" parent="world" instance=ExtResource( 13 )]
+camera_path = NodePath("../../camera")
+
+[node name="enemy_spawner" parent="world" instance=ExtResource( 14 )]
+
+[node name="pools" type="Node" parent="world"]
+editor/display_folded = true
+
+[node name="laser_pool" parent="world/pools" groups=[
 "laser_pool",
 "spawn_listener",
-] instance=ExtResource( 17 )]
-script = ExtResource( 18 )
-objectToPool = ExtResource( 19 )
-
-[node name="gfx_death_pool" parent="pools" groups=[
-"spawn_listener",
-] instance=ExtResource( 20 )]
+] instance=ExtResource( 15 )]
 objectToPool = ExtResource( 16 )
 
-[node name="gfx_hit_pool" parent="pools" groups=[
+[node name="gfx_death_pool" parent="world/pools" groups=[
+"spawn_listener",
+] instance=ExtResource( 17 )]
+objectToPool = ExtResource( 18 )
+
+[node name="gfx_hit_pool" parent="world/pools" groups=[
+"spawn_listener",
+] instance=ExtResource( 19 )]
+objectToPool = ExtResource( 20 )
+
+[node name="gfx_hit_electricity_pool" parent="world/pools" groups=[
 "spawn_listener",
 ] instance=ExtResource( 21 )]
-objectToPool = ExtResource( 22 )
+script = ExtResource( 22 )
+objectToPool = ExtResource( 23 )
+
+[node name="enemy_03_flying_saucer" parent="world" instance=ExtResource( 24 )]
