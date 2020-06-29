@@ -77,6 +77,7 @@ PhysicsHelper="*res://scripts/physics_helper.gd"
 DebugObject="*res://tools/debug_object.tscn"
 Projectile="*res://scripts/projectile_type.gd"
 MaskHelper="*res://scripts/mask.gd"
+Hit="*res://scripts/hit.gd"
 
 [display]
 

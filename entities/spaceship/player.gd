@@ -3,8 +3,9 @@ class_name Player
 
 export(NodePath) var camera_path;
 
+signal move(new_position);
 signal shoot(projectile_type, from, direction, speed, invulnerables);
-signal hit(who);
+signal hit(type, who);
 signal hit_electricity(who);
 
 onready var camera : Camera = get_node(camera_path);
@@ -21,7 +22,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	var velocity = handle_movement();
+	handle_movement();
 	emit_fire_particle();
 	handle_shooting();
 	
@@ -35,29 +36,29 @@ func _physics_process(delta):
 # Returns: velocity of movement
 #
 ####
-func handle_movement() -> Vector3:
+func handle_movement() -> void:
 	direction = Vector3();
 	
 	var is_moving = false;
 	
 	if(Input.is_action_pressed("move_up")):
 		direction.z += -1;
-		direction.x += 2;
+		#direction.x += 2;
 		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_right")):
 		direction.x += 1;
-		direction.z += 2;
+		#direction.z += 2;
 		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_left")):
 		direction.x += -1;
-		direction.z += -2;
+		#direction.z += -2;
 		is_moving = true;
 		pass
 	if(Input.is_action_pressed("move_down")):
 		direction.z += 1;
-		direction.x += -2;
+		#direction.x += -2;
 		is_moving = true;
 		pass
 		
@@ -70,9 +71,8 @@ func handle_movement() -> Vector3:
 	else:
 		deaccelerate();
 		
-	var velocity = move(moving_direction, spaceship.get_speed(), spaceship.get_acceleration_curve());
-	
-	return velocity;
+	move(moving_direction, spaceship.get_speed(), spaceship.get_acceleration_curve());
+	emit_signal("move", global_transform.origin);
 
 #####
 # Function: handle_shooting()
@@ -130,7 +130,7 @@ func equip_spaceship(var spaceship : Spaceship):
 #
 ####
 func on_hit(source):
-	emit_signal("hit", self);
+	emit_signal("hit", Hit.Type.DEFAULT,self);
 	
 # Function: on_hit_electricity(source)
 # 
@@ -140,7 +140,7 @@ func on_hit(source):
 #
 ####
 func on_hit_electricity(source):
-	emit_signal("hit_electricity", self);
+	emit_signal("hit", Hit.Type.ELECTRICITY, self);
 	
 # Function: _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invulnerables)
 # 

@@ -23,10 +23,11 @@ extents = Vector3( 2.17448, 3.62072, 2.60847 )
 collision_layer = 2
 collision_mask = 262146
 script = ExtResource( 1 )
+hit_type = "NUTS_BOLTS"
 
 [node name="spaceship" parent="." instance=ExtResource( 2 )]
 script = SubResource( 1 )
-health = 2
+health = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.663921, 0 )

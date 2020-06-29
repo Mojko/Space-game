@@ -1,16 +1,15 @@
 extends Spatial
 
-export(Array, PackedScene) var enemy_scenes : Array = []; 
-export(NodePath) var player_path : NodePath;
+export(Array, PackedScene) var enemy_scenes : Array = [];
 
 ###### World events ######
 signal spawn_laser_projectile(from, direction, speed, invulnerables);
 signal spawn_electric_bolt_projectile(from, direction, invulnerables);
 signal spawn_gfx_death(me);
-signal spawn_gfx_hit(me);
+signal spawn_gfx_hit(type, me);
 signal spawn_gfx_hit_electricity(me);
+signal spawn_gfx_nuts_bolts(me);
 
-onready var player : KinematicBody = get_node(player_path);
 onready var teleporter : Spatial = get_node("teleporter");
 
 var enemies : Array = [];
@@ -20,8 +19,8 @@ func _ready():
 	hide_teleporter();
 
 func spawn_enemies():
-	var x = 0;
-	var y = 0;
+	var x = 4;
+	var y = 4;
 	
 	for i in x:
 		for j in y:
@@ -35,9 +34,9 @@ func spawn_enemies():
 			randomize();
 			var side = randi() % 2;
 			if(side == 0):
-				instance.global_transform.origin = Vector3(rand_range(-64, -16), 0, rand_range(-64, -16));
+				instance.global_transform.origin = Vector3(rand_range(-16, 16), 0, rand_range(-16, 16));
 			elif(side == 1):
-				instance.global_transform.origin = Vector3(rand_range(64, 16), 0, rand_range(64, 16));
+				instance.global_transform.origin = Vector3(rand_range(-16, 16), 0, rand_range(-16, 16));
 				
 			
 	print("Spawned ", (x * y), " enemies");
@@ -58,8 +57,14 @@ func on_entity_shoot(projectile_type, from, direction, speed, invulnerables):
 	if(projectile_type == Projectile.Type.ELECTRIC_BOLT_02):
 		emit_signal("spawn_electric_bolt_projectile", from, direction, speed, invulnerables);
 	
-func on_entity_hit(projectile_type, me):
-	emit_signal("spawn_gfx_hit", me);
+func on_entity_hit(type, me):
+	#print(me, " got hit, hit type: ", type);
+	if(type == Hit.Type.DEFAULT):
+		emit_signal("spawn_gfx_hit", me);
+	if(type == Hit.Type.ELECTRICITY):
+		emit_signal("spawn_gfx_hit_electricity", me);
+	if(type == Hit.Type.BOLTS_NUTS):
+		emit_signal("spawn_gfx_nuts_bolts", me);
 	
 func on_entity_death(me):
 	enemies.remove(enemies.find(me));

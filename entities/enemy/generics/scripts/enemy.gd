@@ -1,7 +1,9 @@
 extends KinematicBody
 
+export(String, "DEFAULT", "ELECTRICITY", "NUTS_BOLTS") var hit_type;
+
 signal shoot(projectile_type, from, direction, invulnerables);
-signal hit(entity);
+signal hit(type, entity);
 signal death(entity);
 
 onready var state_machine = get_node("state_machine");
@@ -42,7 +44,7 @@ func _physics_process(delta):
 #
 ####
 func on_hit(source):
-	emit_signal("hit", self);
+	emit_signal("hit", Hit.parse(hit_type), self);
 	
 	spaceship.health -= 1;
 	if(spaceship.health <= 0):

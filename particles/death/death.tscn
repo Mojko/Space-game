@@ -153,6 +153,7 @@ flag_align_y = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 3.5
+angular_velocity = 0.980785
 damping_curve = SubResource( 8 )
 angle = 180.0
 angle_random = 1.0
