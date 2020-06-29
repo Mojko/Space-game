@@ -76,6 +76,7 @@ RayCastHelper="*res://scripts/raycast.gd"
 PhysicsHelper="*res://scripts/physics_helper.gd"
 DebugObject="*res://tools/debug_object.tscn"
 Projectile="*res://scripts/projectile_type.gd"
+MaskHelper="*res://scripts/mask.gd"
 
 [display]
 
@@ -109,6 +110,11 @@ move_left={
 mouse_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+teleport_jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"unicode":0,"echo":false,"script":null)
  ]
 }
 

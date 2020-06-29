@@ -3,7 +3,7 @@ class_name Player
 
 export(NodePath) var camera_path;
 
-signal shoot(projectile_type, from, direction, invulnerables);
+signal shoot(projectile_type, from, direction, speed, invulnerables);
 signal hit(who);
 signal hit_electricity(who);
 
@@ -28,8 +28,6 @@ func _physics_process(delta):
 	#Look towards where you're going
 	if(rotate_with_mouse == false and direction.length() > 0):
 		PhysicsHelper.look_at_smooth(self, -direction, 0.2);
-		pass
-	pass
 
 #####
 # Function: handle_movement()
@@ -109,10 +107,8 @@ func handle_shooting():
 func emit_fire_particle():
 	if(get_velocity().length() > 3.5):
 		spaceship.set_thrust_state(true);
-		pass
 	else:
 		spaceship.set_thrust_state(false);
-	pass
 
 # Function: equip_spaceship(spaceship)
 # 
@@ -124,6 +120,7 @@ func emit_fire_particle():
 func equip_spaceship(var spaceship : Spaceship):
 	self.spaceship = spaceship;
 	self.spaceship.activate();
+	$CollisionShape.shape = self.spaceship.collision_shape;
 
 # Function: on_hit(source)
 # 
@@ -142,7 +139,7 @@ func on_hit(source):
 # Returns: -
 #
 ####
-func hit_electricity(source):
+func on_hit_electricity(source):
 	emit_signal("hit_electricity", self);
 	
 # Function: _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invulnerables)
@@ -153,7 +150,7 @@ func hit_electricity(source):
 #
 ####
 func _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invulnerables):
-	emit_signal("shoot", projectile_type, from, direction, invulnerables);
+	emit_signal("shoot", projectile_type, from, direction, 1, invulnerables);
 
 #####
 # Function: _on_AimTimer_timeout()

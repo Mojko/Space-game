@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://models/spaceship_noob/spaceship_noob.dae" type="PackedScene" id=1]
 [ext_resource path="res://entities/spaceship/spaceship.gd" type="Script" id=2]
@@ -7,15 +7,11 @@
 [ext_resource path="res://entities/loadout/loadout.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/loadout/weapon_slot.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0.236 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
 [node name="spaceship_noob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 health = 100
 speed = 5.0
 acceleration_curve = ExtResource( 3 )
-deacceleration_curve = SubResource( 1 )
 
 [node name="Cube" parent="." index="0"]
 layers = 2

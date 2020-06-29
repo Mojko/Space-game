@@ -40,7 +40,7 @@ flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 1, 0, 0, 0.435294 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 flags_unshaded = true
 params_billboard_mode = 3
@@ -50,26 +50,30 @@ particles_anim_loop = false
 albedo_color = Color( 0, 1, 1, 0.192157 )
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=10]
+[sub_resource type="QuadMesh" id=8]
+size = Vector2( 4, 4 )
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Curve" id=9]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, -251.064 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 0.5121 ), 0.0, 0.921724, 0, 1, Vector2( 0.529334, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5297 ), -0.999223, 0.0, 1, 0 ]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 0.198906, 0.688142, 0.365878 )
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 2.27831, 10.5049, 1.42128 )
 
 [node name="projectile_1_electric_shock" type="Area"]
-transform = Transform( -1, 0, 8.74228e-008, 0, 1, 0, -8.74228e-008, 0, -1, 0, 0, 0 )
-collision_layer = 524288
+transform = Transform( -1, 0, 1.50996e-007, 0, 1, 0, -1.50996e-007, 0, -1, 0, 0, 0 )
+input_ray_pickable = false
+collision_layer = 262144
+collision_mask = 131072
 script = ExtResource( 1 )
+method_to_call = "on_hit_electricity"
 hit_particle = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -80,9 +84,9 @@ material/0 = SubResource( 6 )
 
 [node name="lightning_bolt" type="CPUParticles" parent="."]
 transform = Transform( 0.00887796, 0.596822, 0.802324, -0.577689, 0.657977, -0.483055, -0.816209, -0.459205, 0.350619, 0, 0, 0 )
-material_override = SubResource( 9 )
+material_override = SubResource( 7 )
 lifetime = 0.5
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 flag_align_y = true
 flag_rotate_y = true
 flag_disable_z = true
@@ -90,19 +94,20 @@ spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 0.0
 angular_velocity = 1.06134e-005
-angle_curve = SubResource( 11 )
-scale_amount_curve = SubResource( 12 )
+angle_curve = SubResource( 9 )
+scale_amount_curve = SubResource( 10 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 0, 0 )
 visible = false
 mesh = SubResource( 5 )
-material/0 = SubResource( 7 )
+material/0 = SubResource( 11 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0331972, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 12 )
 
 [node name="death_timer" type="Timer" parent="."]
+wait_time = 3.0
 [connection signal="body_entered" from="." to="." method="_on_laser_00_body_entered"]
 [connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

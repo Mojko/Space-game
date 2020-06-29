@@ -4,7 +4,7 @@ class_name Spaceship
 export(int, 0, 1000, 1.0) var health;
 export(float, 0, 1000, 0.01) var speed;
 export(Curve) var acceleration_curve;
-export(Curve) var deacceleration_curve;
+export(Resource) var collision_shape;
 
 onready var fire_particles = get_node("fire_particles");
 onready var loadout = get_node("loadout");
@@ -18,9 +18,6 @@ func get_acceleration(var x : float) -> float:
 func get_acceleration_curve() -> Curve:
 	return acceleration_curve;
 
-func get_deacceleration_curve() -> Curve:
-	return deacceleration_curve;
-
 func get_speed() -> float:
 	return speed;
 	
@@ -33,3 +30,6 @@ func activate():
 	set_process(true);
 	set_physics_process(true);
 	show();
+	
+func get_collision_shape_copy():
+	return collision_shape.instance();

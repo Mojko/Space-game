@@ -3,7 +3,7 @@
 [ext_resource path="res://entities/ground/ground.gd" type="Script" id=1]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 36.7986, 0.0487205, 30.2779 )
+extents = Vector3( 50.8385, 0.0487205, 49.7367 )
 
 [node name="ground" type="Spatial"]
 script = ExtResource( 1 )

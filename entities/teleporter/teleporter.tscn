@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://models/teleporter/teleporter.dae" type="PackedScene" id=1]
+[ext_resource path="res://entities/teleporter/teleporter.gd" type="Script" id=2]
+[ext_resource path="res://entities/teleporter/black_hole.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.129412, 0.243137, 0.376471, 0.635294 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.71669, 1.8049, 1.75233 )
+
+[node name="teleporter" instance=ExtResource( 1 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0287113, -4.76837e-007, 0.0466671 )
+script = ExtResource( 2 )
+
+[node name="Torus" parent="." index="0"]
+transform = Transform( 0.132989, -0.838346, 0.528668, 0.9368, 0.280484, 0.209126, -0.323603, 0.467445, 0.822664, 0, 0, 0 )
+material/0 = SubResource( 1 )
+
+[node name="black_hole" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="OmniLight" type="OmniLight" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.657, 1.76376, 2.06433 )
+light_color = Color( 0.168627, 0.721569, 0.913725, 1 )
+light_energy = 4.0
+omni_range = 7.37637
+
+[node name="area" type="Area" parent="." index="4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0902588 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="area" to="." method="_on_area_body_exited"]

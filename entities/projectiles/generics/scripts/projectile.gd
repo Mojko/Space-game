@@ -1,5 +1,6 @@
 extends Spatial
 
+export(String, "on_hit", "on_hit_electricity") var method_to_call;
 export(PackedScene) var hit_particle;
 
 signal hit();
@@ -40,15 +41,12 @@ func _on_laser_00_body_entered(body):
 	if(!is_firing):
 		return
 		
-	if(!invulnerables):
-		print("INVULNERABLES ARE NULL: ", invulnerables);
-		
 	for i in invulnerables:
 		if(body.is_in_group(i)):
 			return
 			
-	if(body.has_method("on_hit")):
-		body.on_hit(source);
+	if(body.has_method(method_to_call)):
+		body.call(method_to_call, source);
 		
 	die();
 	

@@ -58,11 +58,10 @@ func on_hit(source):
 # Returns: -
 #
 ####
-func _on_attacking_shoot(direction, invulnerables):
-	
+func _on_attacking_shoot(projectile_type, direction, speed, invulnerables):
 	for weapon_slot in spaceship.loadout.get_weapon_slots():
 		
 		var weapon_slot_dir = weapon_slot.get_weapon_direction();
 		
 		if(weapon_slot.has_weapon()):
-			emit_signal("shoot", Projectile.Type.LASER_01, weapon_slot, weapon_slot.global_transform.basis.z.normalized(), invulnerables);
+			emit_signal("shoot", projectile_type, weapon_slot, weapon_slot.global_transform.basis.z.normalized(), speed, invulnerables);

@@ -20,7 +20,7 @@ func physics_update(parent : KinematicBody):
 	PhysicsHelper.look_at_smooth(parent, look_dir, 0.2);
 	
 	if(can_shoot and in_range_for_attack(parent)):
-		target.hit_electricity(.get_owner());
+		target.on_hit_electricity(.get_owner());
 		#.emit_signal("shoot", -look_dir.normalized(), [Groups.Enemy]);
 		shoot_delay.start();
 		can_shoot = false;
