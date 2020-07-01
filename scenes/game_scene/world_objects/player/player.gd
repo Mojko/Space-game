@@ -117,7 +117,7 @@ func emit_fire_particle():
 # Returns: -
 #
 ####
-func equip_spaceship(var spaceship : Spaceship):
+func _on_spaceship_repository_equip_spaceship(spaceship):
 	self.spaceship = spaceship;
 	self.spaceship.activate();
 	$CollisionShape.shape = self.spaceship.collision_shape;

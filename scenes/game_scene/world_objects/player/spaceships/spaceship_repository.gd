@@ -1,9 +1,8 @@
 extends Node
 
-export(NodePath) var player_path;
 export(Array, NodePath) var spaceship_repository_paths;
 
-onready var player = get_node(player_path);
+signal equip_spaceship(spaceship);
 
 var spaceship_repository : Array = [];
 
@@ -11,10 +10,5 @@ func _ready():
 	for i in spaceship_repository_paths:
 		spaceship_repository.append(get_node(i));
 		get_node(i).inactivate();
-		pass
 		
-	player.equip_spaceship(spaceship_repository[2]);
-	pass
-
-#func _process(delta):
-#	pass
+	emit_signal("equip_spaceship", spaceship_repository[0]);

@@ -10,18 +10,6 @@
 [ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/game_scene/world_objects/player/player_shooting_behaviour.gd" type="Script" id=9]
 
-
-
-
-
-
-
-
-
-
-
-
-
 [sub_resource type="BoxShape" id=1]
 
 [node name="player" type="KinematicBody" groups=[
@@ -38,7 +26,6 @@ shape = SubResource( 1 )
 [node name="spaceship_repository" type="Spatial" parent="."]
 editor/display_folded = true
 script = ExtResource( 2 )
-player_path = NodePath("..")
 spaceship_repository_paths = [ NodePath("spaceship_noob"), NodePath("spaceship_1"), NodePath("spaceship_2") ]
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
@@ -66,6 +53,7 @@ script = ExtResource( 9 )
 wait_time = 0.25
 
 [node name="sfx_pew" type="AudioStreamPlayer" parent="player_shooting_behaviour"]
+[connection signal="equip_spaceship" from="spaceship_repository" to="." method="_on_spaceship_repository_equip_spaceship"]
 [connection signal="timeout" from="aim_timer" to="." method="_on_AimTimer_timeout"]
 [connection signal="shoot" from="player_shooting_behaviour" to="." method="_on_player_shooting_behaviour_shoot"]
 [connection signal="timeout" from="player_shooting_behaviour/attack_delay" to="player_shooting_behaviour" method="_on_attack_delay_timeout"]

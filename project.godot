@@ -72,6 +72,7 @@ DebugObject="*res://tools/debug_object.tscn"
 Projectile="*res://scripts/projectile_type.gd"
 MaskHelper="*res://scripts/mask.gd"
 Hit="*res://scripts/hit.gd"
+SceneLoader="*res://scenes/scene_loader.gd"
 
 [display]
 
