@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://models/spaceship_1/spaceship_1.dae" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_1/collider.tres" type="Shape" id=3]
+[ext_resource path="res://models/spaceship_1/wings.material" type="Material" id=4]
+[ext_resource path="res://scenes/game_scene/particles/fire_particles/fire_particles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game_scene/world_objects/loadout/loadout.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game_scene/world_objects/loadout/weapon_slot.tscn" type="PackedScene" id=7]
+
+
+
+
+
+
+
+
+
+[node name="spaceship_1" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+collision_shape = ExtResource( 3 )
+
+[node name="Cube_001" parent="." index="1"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube_002" parent="." index="2"]
+material/0 = ExtResource( 4 )
+
+[node name="fire_particles" parent="." index="4" instance=ExtResource( 5 )]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 1.62999 )
+
+[node name="loadout" parent="." index="5" instance=ExtResource( 6 )]
+weapon_slots_path = [ NodePath("weapon_slot_3") ]
+
+[node name="weapon_slot_1" parent="loadout" index="0" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11259, 0, -1.85932 )
+
+[node name="weapon_slot_2" parent="loadout" index="1" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21688, 0, -2.18922 )
+
+[node name="weapon_slot_3" parent="loadout" index="2" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5995, 0 )
+
+[node name="weapon_slot_4" parent="loadout" index="3" instance=ExtResource( 7 )]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://models/enemy_02_jellyfish/lightning.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game_scene/particles/particle.gd" type="Script" id=2]
+
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0, 1, 0.929412, 0.192157 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=2]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.9246 ), 0.0, 0.0, 0, 0, Vector2( 0.142128, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.325953, 0.9334 ), 0.0, 0.0, 0, 0, Vector2( 0.470666, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.599735, 0.8894 ), 0.0, 0.0, 0, 0, Vector2( 0.764004, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.896983, 0.8454 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="gfx_hit_electricity" type="CPUParticles"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+material_override = SubResource( 1 )
+emitting = false
+amount = 6
+explosiveness = 1.0
+mesh = SubResource( 2 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.0
+angular_velocity = 1.06134e-005
+angle = 720.0
+angle_random = 1.0
+scale_amount_curve = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="death_timer" type="Timer" parent="."]
+[connection signal="timeout" from="death_timer" to="." method="kill"]

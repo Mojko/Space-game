@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://misc/pools/gfx_nuts_bolts_pool/gfx_nuts_bolts_pool.gd" type="Script" id=1]
-
-[node name="gfx_nuts_bolts_pool" type="Node"]
-script = ExtResource( 1 )
