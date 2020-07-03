@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/level_select/objects/planets/planet.gd" type="Script" id=1]
-[ext_resource path="res://models/planet_0/2k_mercury.jpg" type="Texture" id=2]
+[ext_resource path="res://images/textures/planets/pluto_2k_blue.jpg" type="Texture" id=2]
 [ext_resource path="res://scripts/spinner.gd" type="Script" id=3]
 [ext_resource path="res://scenes/level_select/objects/planets/planet_0/ranking.gd" type="Script" id=4]
 [ext_resource path="res://scenes/level_select/images/star.png" type="Texture" id=5]
@@ -18,7 +18,7 @@ albedo_color = Color( 0.2, 0.2, 0.2, 1 )
 resource_local_to_scene = true
 flags_albedo_tex_force_srgb = true
 flags_do_not_receive_shadows = true
-albedo_color = Color( 0.341176, 0.352941, 0.564706, 1 )
+albedo_color = Color( 0.258824, 0.372549, 0.486275, 1 )
 albedo_texture = ExtResource( 2 )
 
 [sub_resource type="SphereMesh" id=4]
@@ -32,9 +32,10 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[node name="planet_0" type="Spatial"]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -8.998, 0 )
+[node name="planet_1" type="Spatial"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -25.8223, -8.998, -17.4822 )
 script = ExtResource( 1 )
+planet_rank = 2
 
 [node name="outline" type="MeshInstance" parent="."]
 transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0 )
@@ -52,7 +53,6 @@ spin_axis = "y"
 spin_speed = 0.003
 
 [node name="area" type="Area" parent="."]
-editor/display_folded = true
 
 [node name="CollisionShape" type="CollisionShape" parent="area"]
 shape = SubResource( 5 )

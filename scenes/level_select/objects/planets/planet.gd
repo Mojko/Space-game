@@ -1,9 +1,11 @@
 extends Spatial
 
+export(PackedScene) var planet_scene;
 export(String) var planet_name;
-export(int, 1, 5) var planet_rank;
+export(int, 0, 4) var planet_rank;
 
 signal travel_here(planet, position);
+signal select(planet);
 
 onready var planet = get_node("planet");
 onready var outline = get_node("outline");
@@ -23,6 +25,7 @@ func _process(delta):
 	
 	if(Input.is_action_just_pressed("mouse_left")):
 		emit_signal("travel_here", self, travel_to.global_transform.origin);
+		select();
 
 func _on_area_mouse_entered():
 	mouse_has_entered = true;
@@ -55,6 +58,7 @@ func dehighlight():
 func select():
 	highlight();
 	selected = true;
+	emit_signal("select", self);
 	
 func deselect():
 	if(!selected):

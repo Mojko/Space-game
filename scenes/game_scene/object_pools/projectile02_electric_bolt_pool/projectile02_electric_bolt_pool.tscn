@@ -1,3 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/projectile02_electric_bolt_pool/projectile02_electric_bolt_pool.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_electric_bolt/projectile02_electric_bolt.tscn" type="PackedScene" id=2]
+
+
+
 
 [node name="projectile02_electric_bolt_pool" type="Node"]
+script = ExtResource( 1 )
+objectToPool = ExtResource( 2 )

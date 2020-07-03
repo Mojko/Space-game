@@ -3,7 +3,7 @@ extends ObjectPool
 func _ready():
 	expand(25);
 
-func _on_world_spawn_gfx_hit_electricity(me):
+func _on_planet_spawn_gfx_hit_electricity(me):
 	var instance = spawn_object_from_pool(me.global_transform.origin);
 	instance.emit();
 	instance.follow(me);

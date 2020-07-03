@@ -9,10 +9,18 @@ func _ready():
 	var root = get_tree().get_root();
 	current_scene = root.get_child(root.get_child_count() - 1);
 
-func load_scene(scene_path : String, scene_data : Array = []):
+func load_scene(scene_path : String, scene_data : Dictionary = {}):
 	print("Loading scene ", scene_path);
 	call_deferred("_goto_scene", scene_path, scene_data);
-
+	
+func load_resource(resource_path : String):
+	var interactive_loader = ResourceLoader.load_interactive(resource_path);
+	while(interactive_loader.poll() != ERR_FILE_EOF):
+		print("Loading a resource...");
+	
+	var resource_instance = interactive_loader.get_resource().instance();
+	return resource_instance;
+		
 func _goto_scene(scene_path, scene_data):
 	print(current_scene.name);
 	current_scene.free();

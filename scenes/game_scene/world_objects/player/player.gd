@@ -24,7 +24,7 @@ func _physics_process(delta):
 	
 	handle_movement();
 	emit_fire_particle();
-	handle_shooting();
+#	handle_shooting();
 	
 	#Look towards where you're going
 	if(rotate_with_mouse == false and direction.length() > 0):
@@ -83,18 +83,14 @@ func handle_movement() -> void:
 # Returns: -
 #
 ####
-func handle_shooting():
-	if(Input.is_action_pressed("mouse_left")):
-		
-		var result = RayCastHelper.raycast_from_mouse(camera);
-		
-		rotate_with_mouse = true;
-		if(result.has('position')):
-			var aim_direction = (self.global_transform.origin - result.position).normalized();
-			PhysicsHelper.look_at_smooth(self, aim_direction, 1);
-			
-			aim_timer.start();
-			shooting_behaviour.shoot(aim_direction);
+#func handle_shooting():
+#	if(Input.is_action_pressed("mouse_left")):
+#
+#		var result = RayCastHelper.raycast_from_mouse(camera);
+#
+#		rotate_with_mouse = true;
+#		if(result.has('position')):
+
 			
 #####
 # Function: emit_fire_particle()
@@ -163,4 +159,20 @@ func _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invul
 ####
 func _on_AimTimer_timeout():
 	rotate_with_mouse = false;
-	pass
+	
+#####
+# Function: _on_raycast_shoot(result)
+#
+# When the left mouse button is pressed the camera will send out a signal if
+# a raycast has been hit
+#
+# Returns: -
+#
+####
+func _on_raycast_shoot(result):
+	var aim_direction = (self.global_transform.origin - result.position).normalized();
+	PhysicsHelper.look_at_smooth(self, aim_direction, 1);
+	
+	aim_timer.start();
+	shooting_behaviour.shoot(aim_direction);
+	rotate_with_mouse = true;

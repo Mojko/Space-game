@@ -2,7 +2,7 @@ extends Spatial
 
 export(Array, PackedScene) var enemy_scenes : Array = [];
 
-###### World events ######
+#### World events ####
 signal spawn_laser_projectile(from, direction, speed, invulnerables);
 signal spawn_electric_bolt_projectile(from, direction, invulnerables);
 signal spawn_gfx_death(me);
@@ -10,36 +10,30 @@ signal spawn_gfx_hit(type, me);
 signal spawn_gfx_hit_electricity(me);
 signal spawn_gfx_nuts_bolts(me);
 
+signal raycast_shoot(result);
+
+#### World Objects ####
 onready var teleporter : Spatial = get_node("teleporter");
+onready var player : KinematicBody = get_node("player");
+
+#### Pools ####
+onready var projectile01_laser_pool = get_node("pools/projectile01_laser_pool");
+onready var projectile02_electric_bolt_pool = get_node("pools/projectile02_electric_bolt_pool");
+onready var gfx_death_pool = get_node("pools/gfx_death_pool");
+onready var gfx_hit_pool = get_node("pools/gfx_hit_pool");
+onready var gfx_hit_electricity_pool = get_node("pools/gfx_hit_electricity_pool");
+onready var gfx_nuts_bolts_pool = get_node("pools/gfx_nuts_bolts_pool");
 
 var enemies : Array = [];
 
 func _ready():
-	spawn_enemies();
+	self.connect("spawn_electric_bolt_projectile", projectile02_electric_bolt_pool, "_on_planet_spawn_electric_bolt_projectile");
+	self.connect("spawn_gfx_death", gfx_death_pool, "_on_planet_spawn_gfx_death");
+	self.connect("spawn_gfx_hit", gfx_hit_pool, "_on_planet_spawn_gfx_hit");
+	self.connect("spawn_gfx_hit_electricity", gfx_hit_electricity_pool, "_on_planet_spawn_gfx_hit_electricity");
+	self.connect("spawn_gfx_nuts_bolts", gfx_nuts_bolts_pool, "_on_planet_spawn_gfx_nuts_bolts");
+	self.connect("spawn_laser_projectile", projectile01_laser_pool, "_on_planet_spawn_laser_projectile");
 	hide_teleporter();
-
-func spawn_enemies():
-	var x = 4;
-	var y = 4;
-	
-	for i in x:
-		for j in y:
-			var instance = enemy_scenes[randi() % enemy_scenes.size()].instance();
-			instance.connect("shoot", self, "on_entity_shoot");
-			instance.connect("hit", self, "on_entity_hit");
-			instance.connect("death", self, "on_entity_death");
-			enemies.append(instance);
-			add_child(instance);
-			
-			randomize();
-			var side = randi() % 2;
-			if(side == 0):
-				instance.global_transform.origin = Vector3(rand_range(-16, 16), 0, rand_range(-16, 16));
-			elif(side == 1):
-				instance.global_transform.origin = Vector3(rand_range(-16, 16), 0, rand_range(-16, 16));
-				
-			
-	print("Spawned ", (x * y), " enemies");
 
 func check_win(last_enemy):
 	if(enemies.size() <= 0):

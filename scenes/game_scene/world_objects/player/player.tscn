@@ -13,8 +13,8 @@
 [sub_resource type="BoxShape" id=1]
 
 [node name="player" type="KinematicBody" groups=[
-"player",
 "friendly",
+"player",
 ]]
 collision_mask = 262144
 script = ExtResource( 1 )

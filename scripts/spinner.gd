@@ -2,7 +2,7 @@ extends Spatial
 
 export(bool) var should_spin;
 export(String, "x", "y", "z") var spin_axis;
-export(float, 0.01, 1) var spin_speed;
+export(float, 0.001, 1) var spin_speed;
 
 export(bool) var should_scale;
 

@@ -9,6 +9,6 @@ func expand(size):
 		instance.connect("death", self, "add_to_pool");
 		add_to_pool(instance);
 
-func _on_world_spawn_gfx_death(me):
+func _on_planet_spawn_gfx_death(me):
 	var instance = spawn_object_from_pool(me.global_transform.origin);
 	instance.emit();

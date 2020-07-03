@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/sun_k_red_normal.png-402f1f30106f40d7f61b96c9b9d3a709.s3tc.stex"
+path.etc="res://.import/sun_k_red_normal.png-402f1f30106f40d7f61b96c9b9d3a709.etc.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://images/textures/planets/sun_k_red_normal.png"
+dest_files=[ "res://.import/sun_k_red_normal.png-402f1f30106f40d7f61b96c9b9d3a709.s3tc.stex", "res://.import/sun_k_red_normal.png-402f1f30106f40d7f61b96c9b9d3a709.etc.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=1
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

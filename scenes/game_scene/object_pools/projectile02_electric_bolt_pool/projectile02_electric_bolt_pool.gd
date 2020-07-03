@@ -10,6 +10,6 @@ func expand(size):
 		add_to_pool(instance);
 	print("Expanded required, there are now ", pool.size(), " lasers in pool");
 
-func _on_world_spawn_electric_bolt_projectile(from, direction, speed, invulnerables):
+func _on_planet_spawn_electric_bolt_projectile(from, direction, speed, invulnerables):
 	var instance = spawn_object_from_pool(from.global_transform.origin);
 	instance.fire(from, direction, speed, invulnerables);
