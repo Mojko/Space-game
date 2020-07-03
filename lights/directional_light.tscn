@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game_scene/directional_light.gd" type="Script" id=1]
+
+[node name="directional_light" type="DirectionalLight"]
+transform = Transform( 0.404891, 0.600173, -0.689823, 0.182379, 0.68626, 0.70412, 0.895992, -0.410901, 0.168401, 0, 7.15272, 2.66095 )
+light_color = Color( 0.709804, 0.709804, 0.709804, 1 )
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 16.0
+script = ExtResource( 1 )

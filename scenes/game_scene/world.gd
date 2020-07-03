@@ -15,7 +15,6 @@ onready var teleporter : Spatial = get_node("teleporter");
 var enemies : Array = [];
 
 func _ready():
-	SceneLoader.load_scene(SceneLoader.SCENE_02_LEVEL_SELECT);
 	spawn_enemies();
 	hide_teleporter();
 
