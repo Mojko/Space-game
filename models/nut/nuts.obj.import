@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/nuts.obj-f326cb32c038783724827bf899d4b568.mesh"
+
+[deps]
+
+files=[ "res://.import/nuts.obj-f326cb32c038783724827bf899d4b568.mesh" ]
+
+source_file="res://models/nut/nuts.obj"
+dest_files=[ "res://.import/nuts.obj-f326cb32c038783724827bf899d4b568.mesh", "res://.import/nuts.obj-f326cb32c038783724827bf899d4b568.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

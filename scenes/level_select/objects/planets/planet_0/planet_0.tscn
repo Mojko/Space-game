@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/level_select/objects/planets/planet.gd" type="Script" id=1]
+[ext_resource path="res://models/planet_0/txt.jpg" type="Texture" id=2]
+[ext_resource path="res://scenes/level_select/objects/planets/planet_0/ranking.gd" type="Script" id=3]
+[ext_resource path="res://scenes/level_select/images/star.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+flags_unshaded = true
+params_cull_mode = 1
+albedo_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+flags_albedo_tex_force_srgb = true
+flags_do_not_receive_shadows = true
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SphereMesh" id=4]
+
+[sub_resource type="BoxShape" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="planet_0" type="Spatial"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -8.998, 0 )
+script = ExtResource( 1 )
+
+[node name="outline" type="MeshInstance" parent="."]
+transform = Transform( 1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="planet" type="MeshInstance" parent="."]
+material_override = SubResource( 3 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="area"]
+shape = SubResource( 5 )
+
+[node name="travel_to" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81939, 0 )
+
+[node name="ranking" type="Spatial" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="star" type="Sprite3D" parent="ranking"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30783, 1.8904, 0 )
+material_override = SubResource( 6 )
+pixel_size = 0.002
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="star2" type="Sprite3D" parent="ranking"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50783, 1.8904, 0 )
+material_override = SubResource( 6 )
+pixel_size = 0.002
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="star3" type="Sprite3D" parent="ranking"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29217, 1.8904, 0 )
+material_override = SubResource( 6 )
+pixel_size = 0.002
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="star4" type="Sprite3D" parent="ranking"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09217, 1.8904, 0 )
+material_override = SubResource( 6 )
+pixel_size = 0.002
+texture = ExtResource( 4 )
+hframes = 2
+[connection signal="mouse_entered" from="area" to="." method="_on_area_mouse_entered"]
+[connection signal="mouse_exited" from="area" to="." method="_on_area_mouse_exited"]

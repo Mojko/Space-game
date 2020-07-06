@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/laser_pool/laser_pool.gd" type="Script" id=1]
+
+
+
+[node name="laser_pool" type="Node"]
+script = ExtResource( 1 )
