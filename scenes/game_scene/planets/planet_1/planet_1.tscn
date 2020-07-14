@@ -222,19 +222,19 @@ texture = ExtResource( 9 )
 transform = Transform( -0.45207, 0, -0.891983, 0, 1, 0, 0.891983, 0, -0.45207, -154.421, -16.5148, -20.2681 )
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog4"]
-transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
+transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, 0, 0, 0 )
 material_override = SubResource( 13 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog4"]
-transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
+transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, 0, 0, 0 )
 material_override = SubResource( 13 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog4"]
-transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, -3.05176e-005 )
+transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, -20.8262, 10.661, -3.05176e-005 )
 material_override = SubResource( 13 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
@@ -246,13 +246,13 @@ modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog4"]
-transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
+transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1527 )
 material_override = SubResource( 13 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog4"]
-transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06848 )
+transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06847 )
 material_override = SubResource( 13 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )

@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="shop_item_element" type="Button"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
