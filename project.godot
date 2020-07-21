@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/projectile_type.gd"
 }, {
+"base": "ScrollContainer",
+"class": "Shop",
+"language": "GDScript",
+"path": "res://scenes/level_select/ui/shop/shop_scripts/shop.gd"
+}, {
+"base": "Resource",
+"class": "ShopItem",
+"language": "GDScript",
+"path": "res://scripts/resources/shop_item.gd"
+}, {
 "base": "Spatial",
 "class": "Spaceship",
 "language": "GDScript",
@@ -51,6 +61,8 @@ _global_script_class_icons={
 "PhysicsState": "",
 "Player": "",
 "Projectile": "",
+"Shop": "",
+"ShopItem": "",
 "Spaceship": ""
 }
 
@@ -73,6 +85,7 @@ Projectile="*res://scripts/projectile_type.gd"
 MaskHelper="*res://scripts/mask.gd"
 Hit="*res://scripts/hit.gd"
 SceneLoader="*res://scenes/scene_loader.gd"
+PathArray="*res://scripts/path_array.gd"
 
 [display]
 

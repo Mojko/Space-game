@@ -68,6 +68,6 @@ func on_entity_death(me):
 
 func on_entity_hit_electricity(who):
 	emit_signal("spawn_gfx_hit_electricity", who);
-	
+
 func _on_teleporter_teleport_jump():
 	SceneLoader.load_scene(SceneLoader.SCENE_02_LEVEL_SELECT);

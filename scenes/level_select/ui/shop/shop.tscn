@@ -1,4 +1,225 @@
-[gd_scene format=2]
+[gd_scene load_steps=17 format=2]
 
-[node name="shop" type="GridContainer"]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_container.gd" type="Script" id=1]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_content.gd" type="Script" id=2]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_scripts/shop_ships.gd" type="Script" id=3]
+[ext_resource path="res://scripts/resources/shop_item/spaceship_noob.tres" type="Resource" id=4]
+[ext_resource path="res://scripts/resources/shop_item/spaceship_02.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_scripts/shop_lasers.gd" type="Script" id=6]
+[ext_resource path="res://scripts/resources/shop_item/laser_00.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/level_select/ui/shop/preview.gd" type="Script" id=8]
+[ext_resource path="res://scenes/level_select/ui/shop/preview_container.gd" type="Script" id=9]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_item_preview_3d_container/shop_item_preview_3d_container.gd" type="Script" id=10]
+[ext_resource path="res://scripts/spinner.gd" type="Script" id=11]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_preview_3d_ship_noob/shop_item_ship_noob_model.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_preview_3d_ship_2/shop_item_ship_2_model.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_cost.gd" type="Script" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "rotation"
+length = 3.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "rotation-loop"
+loop = true
+
+[node name="shop_container" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 540.0
+custom_constants/separation = 0
+
+[node name="shop_categories" type="MarginContainer" parent="HBoxContainer"]
+editor/display_folded = true
+margin_right = 100.0
+margin_bottom = 540.0
+rect_min_size = Vector2( 100, 0 )
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+
+[node name="shop_categories" type="VBoxContainer" parent="HBoxContainer/shop_categories"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 100.0
+margin_bottom = 540.0
+custom_constants/separation = 1
+
+[node name="shop_category_ships_button" type="Button" parent="HBoxContainer/shop_categories/shop_categories"]
+margin_right = 90.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 70, 40 )
+text = "Ships"
+
+[node name="shop_category_lasers_button" type="Button" parent="HBoxContainer/shop_categories/shop_categories"]
+margin_top = 41.0
+margin_right = 90.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 70, 40 )
+
+[node name="content" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 100.0
+margin_right = 900.0
+margin_bottom = 540.0
+rect_min_size = Vector2( 800, 0 )
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="bg" type="ColorRect" parent="HBoxContainer/content"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 800.0
+margin_bottom = 530.0
+rect_min_size = Vector2( 500, 0 )
+color = Color( 0.0939585, 0.0924377, 0.101563, 1 )
+
+[node name="shop_content" type="MarginContainer" parent="HBoxContainer/content/bg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+script = ExtResource( 2 )
+ships_shop_path = NodePath("shop_horizontal_container/shop_ships")
+lasers_shop_path = NodePath("shop_horizontal_container/shop_lasers")
+
+[node name="shop_horizontal_container" type="HBoxContainer" parent="HBoxContainer/content/bg/shop_content"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 790.0
+margin_bottom = 520.0
+
+[node name="shop_ships" type="ScrollContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
+editor/display_folded = true
+visible = false
+margin_right = 490.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 490, 0 )
+script = ExtResource( 3 )
+shop_items = [ ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="grid" type="GridContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships"]
 columns = 5
+
+[node name="shop_item_ship_noob" type="Button" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships/grid"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+
+[node name="shop_item_ship_2" type="Button" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships/grid"]
+margin_left = 94.0
+margin_right = 184.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+
+[node name="shop_lasers" type="ScrollContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
+editor/display_folded = true
+visible = false
+margin_right = 490.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 490, 0 )
+script = ExtResource( 6 )
+shop_items = [ ExtResource( 7 ) ]
+
+[node name="grid" type="GridContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_lasers"]
+columns = 5
+
+[node name="shop_item_laser_00" type="Button" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_lasers/grid"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+
+[node name="preview" type="MarginContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
+editor/display_folded = true
+margin_right = 275.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 275, 0 )
+script = ExtResource( 8 )
+
+[node name="preview_container" type="VBoxContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview"]
+margin_right = 275.0
+margin_bottom = 510.0
+script = ExtResource( 9 )
+shop_item_3d_preview_container_path = NodePath("3d_model/Viewport/shop_item_preview_3d_container")
+text_cost_path = NodePath("cost/MarginContainer/shop_item_cost")
+
+[node name="3d_model" type="ViewportContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container"]
+margin_right = 275.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 232.5, 320 )
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model"]
+size = Vector2( 275, 320 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport"]
+transform = Transform( 1, 0, 0, 0, 0.882364, 0.470567, 0, -0.470567, 0.882364, 0, 4.26912, 7.28873 )
+cull_mask = 65536
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport"]
+autoplay = "rotation-loop"
+anims/rotation = SubResource( 1 )
+anims/rotation-loop = SubResource( 2 )
+
+[node name="SpotLight" type="SpotLight" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport"]
+transform = Transform( 1, 0, 0, 0, -0.0168469, 0.999858, 0, -0.999858, -0.0168469, 0, 5, 0 )
+light_energy = 2.0
+spot_range = 6.03641
+
+[node name="shop_item_preview_3d_container" type="Node" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport"]
+editor/display_folded = true
+script = ExtResource( 10 )
+
+[node name="spinner" type="Spatial" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport/shop_item_preview_3d_container"]
+script = ExtResource( 11 )
+should_spin = true
+spin_axis = "y"
+spin_speed = 0.002
+
+[node name="shop_item_preview_ship_noob_model" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport/shop_item_preview_3d_container/spinner" instance=ExtResource( 12 )]
+
+[node name="shop_item_preview_ship_2_model" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/3d_model/Viewport/shop_item_preview_3d_container/spinner" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = null
+
+[node name="cost" type="Panel" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container"]
+editor/display_folded = true
+margin_top = 324.0
+margin_right = 275.0
+margin_bottom = 354.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/cost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_left = 5
+
+[node name="shop_item_cost" type="Label" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container/cost/MarginContainer"]
+margin_left = 5.0
+margin_top = 8.0
+margin_right = 275.0
+margin_bottom = 22.0
+text = "Cost: 8000"
+script = ExtResource( 14 )
+
+[node name="purchase_button" type="Button" parent="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview/preview_container"]
+margin_top = 358.0
+margin_right = 275.0
+margin_bottom = 408.0
+rect_min_size = Vector2( 0, 50 )
+text = "PURCHASE"
+[connection signal="pressed" from="HBoxContainer/shop_categories/shop_categories/shop_category_ships_button" to="HBoxContainer/content/bg/shop_content" method="_on_shop_category_ships_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/shop_categories/shop_categories/shop_category_lasers_button" to="HBoxContainer/content/bg/shop_content" method="_on_shop_category_lasers_button_pressed"]
+[connection signal="preview_item" from="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships" to="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview" method="_on_shop_preview_item"]
+[connection signal="pressed" from="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships/grid/shop_item_ship_noob" to="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships" method="_on_shop_item_ship_noob_pressed"]
+[connection signal="pressed" from="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships/grid/shop_item_ship_2" to="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_ships" method="_on_shop_item_ship_2_pressed"]
+[connection signal="preview_item" from="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_lasers" to="HBoxContainer/content/bg/shop_content/shop_horizontal_container/preview" method="_on_shop_preview_item"]
+[connection signal="pressed" from="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_lasers/grid/shop_item_laser_00" to="HBoxContainer/content/bg/shop_content/shop_horizontal_container/shop_lasers" method="_on_shop_item_laser_00_pressed"]

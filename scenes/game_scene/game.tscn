@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game_scene/game.gd" type="Script" id=1]
 [ext_resource path="res://lights/directional_light.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/3d/3d_gui.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game_scene/camera/camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game_scene/world_objects/ground/ground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game_scene/world_objects/player/player.tscn" type="PackedScene" id=8]
 
 [node name="game" type="Spatial"]
 script = ExtResource( 1 )
@@ -18,8 +19,8 @@ camera_path = NodePath("camera_persp")
 environment = ExtResource( 3 )
 
 [node name="minimap" parent="." groups=[
-"death_listener",
 "spawn_listener",
+"death_listener",
 ] instance=ExtResource( 4 )]
 minimap_path = NodePath("../../game/minimap/minimap")
 
@@ -44,11 +45,23 @@ near = 3.78
 far = 242.4
 
 [node name="camera_persp" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.58623, 0.810145, 0, -0.810145, 0.58623, 0, 32.6748, 24.4746 )
+transform = Transform( 1, 0, 0, 0, 0.698382, 0.715725, 0, -0.715725, 0.698382, 0, 32.6748, 30.9649 )
 projection = 0
+fov = 36.7
+near = 1.18
+far = 2966.7
+
+[node name="camera_backup" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.58623, 0.810145, 0, -0.810145, 0.58623, 0, 32.6748, 24.4746 )
+visible = false
+projection = 0
+current = false
 fov = 36.7
 near = 1.18
 far = 2966.7
 
 [node name="ground" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.253612, 0 )
+
+[node name="player" parent="." instance=ExtResource( 8 )]
+visible = false

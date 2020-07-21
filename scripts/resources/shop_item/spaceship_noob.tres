@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/resources/shop_item.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+preview_model_name = "shop_item_preview_ship_noob_model"
+cost = 5000

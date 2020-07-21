@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/level_select/ui/ui.gd" type="Script" id=1]
 [ext_resource path="res://scripts/spinner.gd" type="Script" id=2]
@@ -9,12 +9,7 @@
 [ext_resource path="res://models/spaceship_2/Stripes.material" type="Material" id=7]
 [ext_resource path="res://models/spaceship_2/Ext.material" type="Material" id=8]
 [ext_resource path="res://models/spaceship_2/Pews.material" type="Material" id=9]
-[ext_resource path="res://scenes/level_select/ui/shop/shop_content.gd" type="Script" id=10]
-[ext_resource path="res://scenes/level_select/ui/shop/shop.gd" type="Script" id=11]
-[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_element.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/level_select/ui/shop/shop_item_preview_3d_container/shop_item_preview_3d_container.gd" type="Script" id=13]
-[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_preview_3d_ship_noob/shop_item_ship_noob_model.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/level_select/ui/shop/shop_items/shop_item_preview_3d_ship_2/shop_item_ship_2_model.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/level_select/ui/shop/shop.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "rotation"
@@ -281,20 +276,13 @@ bg_color = Color( 0.160784, 0.156863, 0.180392, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 
-[sub_resource type="Animation" id=18]
-resource_name = "rotation"
-length = 3.0
-
-[sub_resource type="Animation" id=19]
-resource_name = "rotation-loop"
-loop = true
-
 [node name="ui" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 965.0
 margin_bottom = 544.0
 color = Color( 0, 0, 0, 1 )
@@ -308,6 +296,8 @@ text = "Go to world"
 [node name="MarginContainer" type="MarginContainer" parent="."]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -530,209 +520,12 @@ rect_min_size = Vector2( 96, 64 )
 size_flags_vertical = 0
 text = "SKILL TREE"
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="bg" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer"]
 margin_top = 74.0
 margin_right = 925.0
 margin_bottom = 524.0
 rect_min_size = Vector2( 900, 450 )
 color = Color( 0.160784, 0.156863, 0.180392, 1 )
 
-[node name="shop" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_top = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop"]
-margin_right = 925.0
-margin_bottom = 450.0
-custom_constants/separation = 0
-
-[node name="shop_categories" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 450.0
-rect_min_size = Vector2( 100, 0 )
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 100.0
-margin_bottom = 450.0
-custom_constants/separation = 1
-
-[node name="shop_category_ships_button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer"]
-margin_right = 90.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 70, 40 )
-text = "Ships"
-
-[node name="shop_category_lasers_button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer"]
-margin_top = 41.0
-margin_right = 90.0
-margin_bottom = 81.0
-rect_min_size = Vector2( 70, 40 )
-
-[node name="Button3" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer"]
-margin_top = 82.0
-margin_right = 90.0
-margin_bottom = 122.0
-rect_min_size = Vector2( 70, 40 )
-
-[node name="Button4" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer"]
-margin_top = 123.0
-margin_right = 90.0
-margin_bottom = 163.0
-rect_min_size = Vector2( 70, 40 )
-
-[node name="content" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer"]
-margin_left = 100.0
-margin_right = 900.0
-margin_bottom = 450.0
-rect_min_size = Vector2( 800, 0 )
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="bg" type="ColorRect" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 800.0
-margin_bottom = 440.0
-rect_min_size = Vector2( 500, 0 )
-color = Color( 0.0939585, 0.0924377, 0.101563, 1 )
-
-[node name="shop_content" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-script = ExtResource( 10 )
-
-[node name="shop_horizontal_container" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 790.0
-margin_bottom = 430.0
-
-[node name="ships_shop" type="ScrollContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
-editor/display_folded = true
-margin_right = 490.0
-margin_bottom = 420.0
-rect_min_size = Vector2( 490, 0 )
-script = ExtResource( 11 )
-
-[node name="grid" type="GridContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/ships_shop"]
-editor/display_folded = true
-margin_right = 184.0
-margin_bottom = 90.0
-columns = 5
-
-[node name="shop_item_ship_noob" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/ships_shop/grid"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-
-[node name="shop_item_ship_2" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/ships_shop/grid"]
-margin_left = 94.0
-margin_right = 184.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-
-[node name="lasers_shop" type="ScrollContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
-visible = false
-margin_right = 490.0
-margin_bottom = 420.0
-rect_min_size = Vector2( 490, 0 )
-script = ExtResource( 11 )
-
-[node name="grid" type="GridContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/lasers_shop"]
-columns = 5
-
-[node name="shop_item_laser_00_button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/lasers_shop/grid" instance=ExtResource( 12 )]
-
-[node name="3d" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container"]
-margin_left = 494.0
-margin_right = 769.0
-margin_bottom = 420.0
-rect_min_size = Vector2( 275, 0 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d"]
-margin_right = 275.0
-margin_bottom = 420.0
-
-[node name="3d_model" type="ViewportContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer"]
-margin_right = 275.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 232.5, 320 )
-stretch = true
-
-[node name="Viewport" type="Viewport" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model"]
-size = Vector2( 275, 320 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="Camera" type="Camera" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport"]
-transform = Transform( 1, 0, 0, 0, 0.882364, 0.470567, 0, -0.470567, 0.882364, 0, 4.26912, 7.28873 )
-cull_mask = 65536
-current = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport"]
-autoplay = "rotation-loop"
-anims/rotation = SubResource( 18 )
-anims/rotation-loop = SubResource( 19 )
-
-[node name="SpotLight" type="SpotLight" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport"]
-transform = Transform( 1, 0, 0, 0, -0.0168469, 0.999858, 0, -0.999858, -0.0168469, 0, 5, 0 )
-light_energy = 2.0
-spot_range = 6.03641
-
-[node name="shop_item_preview_3d_container" type="Node" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport"]
-script = ExtResource( 13 )
-
-[node name="root" type="Spatial" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container"]
-script = ExtResource( 2 )
-should_spin = true
-spin_axis = "y"
-spin_speed = 0.002
-
-[node name="shop_item_preview_ship_noob_model" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container/root" instance=ExtResource( 14 )]
-
-[node name="shop_item_preview_ship_2_model" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container/root" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-should_spin = false
-spin_axis = ""
-spin_speed = 0.0
-
-[node name="Panel" type="Panel" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer"]
-editor/display_folded = true
-margin_top = 324.0
-margin_right = 275.0
-margin_bottom = 354.0
-rect_min_size = Vector2( 0, 30 )
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_left = 5
-
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/Panel/MarginContainer"]
-margin_left = 5.0
-margin_top = 8.0
-margin_right = 275.0
-margin_bottom = 22.0
-text = "Cost: 8000"
-
-[node name="Button" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer"]
-margin_top = 358.0
-margin_right = 275.0
-margin_bottom = 408.0
-rect_min_size = Vector2( 0, 50 )
-text = "PURCHASE"
+[node name="shop" parent="CenterContainer/MarginContainer/VBoxContainer/bg" instance=ExtResource( 10 )]
 [connection signal="pressed" from="go_to_planet" to="." method="_on_go_to_planet_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer/shop_category_ships_button" to="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content" method="_on_shop_category_ships_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/shop_categories/VBoxContainer/shop_category_lasers_button" to="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content" method="_on_shop_category_lasers_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/ships_shop/grid/shop_item_ship_noob" to="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container" method="_on_shop_item_ship_noob_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/ships_shop/grid/shop_item_ship_2" to="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container" method="_on_shop_item_ship_2_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/lasers_shop/grid/shop_item_laser_00_button" to="CenterContainer/MarginContainer/VBoxContainer/ColorRect/shop/HBoxContainer/content/bg/shop_content/shop_horizontal_container/3d/VBoxContainer/3d_model/Viewport/shop_item_preview_3d_container" method="_on_shop_item_laser_00_button_pressed"]

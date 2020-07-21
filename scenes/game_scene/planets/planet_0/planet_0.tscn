@@ -20,7 +20,6 @@
 [ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/game_scene/object_pools/gfx_nuts_bolts_pool/gfx_nuts_bolts_pool.tscn" type="PackedScene" id=19]
 
-
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 flags_unshaded = true
@@ -661,6 +660,7 @@ transform = Transform( 0.665656, 0.620029, 0.415294, -0.573987, 0.781027, -0.246
 script = ExtResource( 12 )
 
 [node name="pools" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="projectile02_electric_bolt_pool" parent="pools" instance=ExtResource( 14 )]
 
