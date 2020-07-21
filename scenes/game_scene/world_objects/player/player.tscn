@@ -1,14 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/game_scene/world_objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_repository.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_noob/spaceship_noob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_noob/collider.tres" type="Shape" id=4]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_1/spaceship_1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/acceleration_curve.tres" type="Curve" id=6]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_2/spaceship_2.tscn" type="PackedScene" id=7]
-[ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=8]
-[ext_resource path="res://scenes/game_scene/world_objects/player/player_shooting_behaviour.gd" type="Script" id=9]
+[ext_resource path="res://audio/sfx/shoot/pew.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/game_scene/world_objects/player/player_shooting_behaviour.gd" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -25,28 +22,20 @@ shape = SubResource( 1 )
 
 [node name="spaceship_repository" type="Spatial" parent="."]
 script = ExtResource( 2 )
-spaceship_repository_paths = [ NodePath("spaceship_2"), NodePath("spaceship_1"), NodePath("spaceship_noob") ]
+spaceship_repository_paths = [ NodePath("spaceship_noob") ]
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
 speed = 8.0
 collision_shape = ExtResource( 4 )
 
-[node name="spaceship_1" parent="spaceship_repository" instance=ExtResource( 5 )]
-health = 100
-speed = 16.0
-acceleration_curve = ExtResource( 6 )
-
-[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 7 )]
-
 [node name="pew" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 5 )
 
 [node name="aim_timer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="player_shooting_behaviour" type="Node" parent="."]
-editor/display_folded = true
-script = ExtResource( 9 )
+script = ExtResource( 6 )
 
 [node name="attack_delay" type="Timer" parent="player_shooting_behaviour"]
 wait_time = 0.25

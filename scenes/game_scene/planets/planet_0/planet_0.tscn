@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/game_scene/planets/planet.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_03_flying_saucer/scenes/enemy_03_flying_saucer.tscn" type="PackedScene" id=2]
@@ -15,10 +15,13 @@
 [ext_resource path="res://environment/asteroids/asteroid_1/asteroid_1.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/game_scene/object_pools/projectile02_electric_bolt_pool/projectile02_electric_bolt_pool.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/game_scene/object_pools/laser_pool/projectile01_laser_pool.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_nuts_bolts_pool/gfx_nuts_bolts_pool.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/game_scene/object_pools/projectile03_laserbeam_pool/projectile03_laserbeam_pool.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/game_scene/object_pools/projectile03_laserbeam_pool/projectile03_laserbeam_pool.gd" type="Script" id=17]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile03_laserbeam/projectile03_laserbeam.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/game_scene/object_pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/game_scene/object_pools/gfx_nuts_bolts_pool/gfx_nuts_bolts_pool.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -660,19 +663,22 @@ transform = Transform( 0.665656, 0.620029, 0.415294, -0.573987, 0.781027, -0.246
 script = ExtResource( 12 )
 
 [node name="pools" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="projectile02_electric_bolt_pool" parent="pools" instance=ExtResource( 14 )]
 
 [node name="projectile01_laser_pool" parent="pools" instance=ExtResource( 15 )]
 
-[node name="gfx_death_pool" parent="pools" instance=ExtResource( 16 )]
+[node name="projectile03_laserbeam_pool" parent="pools" instance=ExtResource( 16 )]
+script = ExtResource( 17 )
+objectToPool = ExtResource( 18 )
 
-[node name="gfx_hit_electricity_pool" parent="pools" instance=ExtResource( 17 )]
+[node name="gfx_death_pool" parent="pools" instance=ExtResource( 19 )]
 
-[node name="gfx_hit_pool" parent="pools" instance=ExtResource( 18 )]
+[node name="gfx_hit_electricity_pool" parent="pools" instance=ExtResource( 20 )]
 
-[node name="gfx_nuts_bolts_pool" parent="pools" instance=ExtResource( 19 )]
+[node name="gfx_hit_pool" parent="pools" instance=ExtResource( 21 )]
+
+[node name="gfx_nuts_bolts_pool" parent="pools" instance=ExtResource( 22 )]
 [connection signal="hit" from="player" to="." method="on_entity_hit"]
 [connection signal="hit_electricity" from="player" to="." method="on_entity_hit_electricity"]
 [connection signal="shoot" from="player" to="." method="on_entity_shoot"]

@@ -10,6 +10,7 @@ extends Spatial
 
 ### Camera ###
 export(NodePath) var camera_path : NodePath;
+
 onready var camera : Camera = get_node(camera_path);
 
 #####
@@ -38,4 +39,4 @@ func load_scene(scene_data : Dictionary):
 #	planet_instance.connect("spawn_laser_projectile", projectile01_laser_pool, "_on_planet_spawn_laser_projectile");
 	camera.connect("raycast_shoot", planet_instance.player, "_on_raycast_shoot");
 	planet_instance.player.connect("move", camera, "_on_player_move");
-		
+	planet_instance.player.connect("move", $ground, "_on_player_move");

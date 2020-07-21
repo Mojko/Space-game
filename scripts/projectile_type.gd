@@ -3,5 +3,6 @@ class_name Projectile
 
 enum Type {
 	LASER_01,
-	ELECTRIC_BOLT_02
+	ELECTRIC_BOLT_02,
+	LASERBEAM_03
 }
