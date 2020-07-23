@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/projectile03_laserbeam.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/part_laser.gd" type="Script" id=2]
+
+
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 0.309804, 0.0627451, 0.0627451, 1 )
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.301777, 0.175486, 2.84953 )
+
+[node name="projectile03_laserbeam" type="Area"]
+script = ExtResource( 1 )
+
+[node name="gfx_laser" type="CPUParticles" parent="."]
+transform = Transform( -0.25, 0, -3.7749e-008, 0, 0.25, 0, 3.7749e-008, 0, -0.25, 0, 0, 0 )
+material_override = SubResource( 1 )
+amount = 100
+lifetime = 0.2
+mesh = SubResource( 2 )
+emission_points = PoolVector3Array( 0, 0, 0, 0, 0, 0.1, 0, 0, 0.2, 0, 0, 0.3, 0, 0, 0.4, 0, 0, 0.5, 0, 0, 0.6, 0, 0, 0.7, 0, 0, 0.8, 0, 0, 0.9, 0, 0, 1, 0, 0, 1.1, 0, 0, 1.2, 0, 0, 1.3, 0, 0, 1.4, 0, 0, 1.5, 0, 0, 1.6, 0, 0, 1.7, 0, 0, 1.8, 0, 0, 1.9, 0, 0, 2, 0, 0, 2.1, 0, 0, 2.2, 0, 0, 2.3, 0, 0, 2.4 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+angular_velocity = 1.06134e-005
+color = Color( 0.258824, 0.592157, 0.403922, 1 )
+script = ExtResource( 2 )
+
+[node name="tween_shrink" type="Tween" parent="gfx_laser"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.86784 )
+shape = SubResource( 3 )
+
+[node name="death_timer" type="Timer" parent="."]
+wait_time = 0.5
+[connection signal="body_entered" from="." to="." method="_on_projectile03_laserbeam_body_entered"]
+[connection signal="timeout" from="death_timer" to="gfx_laser" method="_on_death_timer_timeout"]
+[connection signal="timeout" from="death_timer" to="." method="die"]

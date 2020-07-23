@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shoot_laser_deep.wav-adc2bf7be984da80dd48704ceba8b895.sample"
+
+[deps]
+
+source_file="res://audio/sfx/shoot_laser_deep/shoot_laser_deep.wav"
+dest_files=[ "res://.import/shoot_laser_deep.wav-adc2bf7be984da80dd48704ceba8b895.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

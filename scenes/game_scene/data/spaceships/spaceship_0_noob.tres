@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_0_noob/collider.tres" type="Shape" id=1]
+[ext_resource path="res://scenes/game_scene/data/spaceships/spaceship_data.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[resource]
+script = ExtResource( 2 )
+health = 100
+speed = 8.0
+acceleration_curve = SubResource( 1 )
+collision_shape = ExtResource( 1 )

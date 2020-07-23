@@ -11,7 +11,7 @@ func create_instance() -> Spatial:
 	return instance;
 
 func add_to_pool(object : Spatial) -> void:
-	object.global_transform.origin = Vector3(999, 999, 999);
+	object.global_transform.origin = Vector3(0, 0, 1);
 	object.set_process(false);
 	object.hide();
 	pool.append(object);

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/game_scene/particles/part_hit_nutsbolt/part_hit_nutsbolts.gd" type="Script" id=1]
+[ext_resource path="res://models/bolt/bolts.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://models/nut/nuts.obj" type="ArrayMesh" id=3]
+
+[sub_resource type="Curve" id=1]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0.0300926, -360 ), 0.0, 0.0, 0, 0, Vector2( 1, 360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[node name="part_hit_nutsbolts" type="Spatial"]
+script = ExtResource( 1 )
+particles_paths = [ NodePath("bolts"), NodePath("nuts") ]
+
+[node name="bolts" type="CPUParticles" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+explosiveness = 1.0
+mesh = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_align_y = true
+flag_rotate_y = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 8.0
+angular_velocity = 0.037037
+angle_curve = SubResource( 1 )
+scale_amount_curve = SubResource( 2 )
+
+[node name="nuts" type="CPUParticles" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+explosiveness = 1.0
+mesh = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_rotate_y = true
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 8.0
+angular_velocity = 0.037037
+angle_curve = SubResource( 1 )
+scale_amount_curve = SubResource( 2 )
+
+[node name="death_timer" type="Timer" parent="."]
+wait_time = 0.5
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

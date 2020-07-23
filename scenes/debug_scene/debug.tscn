@@ -4,9 +4,15 @@
 [ext_resource path="res://scenes/game_scene/camera/camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game_scene/world_objects/ground/ground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy_spawner/enemy_spawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/game_scene/object_pools/laser_pool/projectile01_laser_pool.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile01_laser/projectile01_laser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_projectile00_laser/pool_projectile00_laser.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile00_laser/projectile00_laser.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/generics/skybox.tscn" type="PackedScene" id=7]
+
+
+
+
+
+
 
 
 

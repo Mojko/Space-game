@@ -4,7 +4,7 @@ class_name Player
 export(NodePath) var camera_path;
 
 signal move(new_position);
-signal shoot(projectile_type, from, direction, speed, invulnerables);
+signal shoot(laser_data, from, direction, invulnerables);
 signal hit(type, who);
 signal hit_electricity(who);
 
@@ -12,7 +12,7 @@ onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node("aim_timer");
 onready var shooting_behaviour : Node = get_node("player_shooting_behaviour");
 
-var spaceship : Spaceship;
+var spaceship;
 var direction : Vector3 = Vector3();
 var rotate_with_mouse : bool = false;
 var can_shoot : bool = false;
@@ -115,6 +115,7 @@ func emit_fire_particle():
 ####
 func _on_spaceship_repository_equip_spaceship(spaceship):
 	self.spaceship = spaceship;
+	self.spaceship.connect("shoot", self, "_on_spaceship_shoot");
 	self.spaceship.activate();
 	$CollisionShape.shape = self.spaceship.collision_shape;
 
@@ -138,16 +139,6 @@ func on_hit(source):
 func on_hit_electricity(source):
 	emit_signal("hit", Hit.Type.ELECTRICITY, self);
 	
-# Function: _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invulnerables)
-# 
-# Ran when the player shooting behaviour shoots
-#
-# Returns: -
-#
-####
-func _on_player_shooting_behaviour_shoot(projectile_type, from, direction, invulnerables):
-	emit_signal("shoot", projectile_type, from, direction, 1, invulnerables);
-
 #####
 # Function: _on_AimTimer_timeout()
 #
@@ -174,5 +165,8 @@ func _on_raycast_shoot(result):
 	PhysicsHelper.look_at_smooth(self, aim_direction, 1);
 	
 	aim_timer.start();
-	shooting_behaviour.shoot(aim_direction);
+	spaceship.loadout.shoot();
 	rotate_with_mouse = true;
+	
+func _on_spaceship_shoot(laser_data, from, direction):
+	emit_signal("shoot", laser_data, from, direction, [Groups.Player]);

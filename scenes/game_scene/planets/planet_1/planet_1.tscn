@@ -4,9 +4,9 @@
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_03_flying_saucer/scenes/enemy_03_flying_saucer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game_scene/world_objects/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game_scene/world_objects/teleporter/teleporter.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/game_scene/particles/stars/stars_layer_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game_scene/particles/part_stars/part_stars_layer_1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://images/particle.png" type="Texture" id=6]
-[ext_resource path="res://scenes/game_scene/particles/stars/stars_layer_2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game_scene/particles/part_stars/part_stars_layer_2.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game_scene/particles/fog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://images/fog.png" type="Texture" id=9]
 [ext_resource path="res://models/planet_0/render.png" type="Texture" id=10]
@@ -14,12 +14,12 @@
 [ext_resource path="res://environment/asteroids/asteroid_0/asteroid_0.tscn" type="PackedScene" id=12]
 [ext_resource path="res://environment/asteroids/asteroid.gd" type="Script" id=13]
 [ext_resource path="res://environment/asteroids/asteroid_1/asteroid_1.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/game_scene/object_pools/projectile02_electric_bolt_pool/projectile02_electric_bolt_pool.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/game_scene/object_pools/laser_pool/projectile01_laser_pool.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_death_pool/gfx_death_pool.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_electricity_pool/gfx_hit_electricity_pool.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_hit_pool/gfx_hit_pool.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scenes/game_scene/object_pools/gfx_nuts_bolts_pool/gfx_nuts_bolts_pool.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_projectile01_electric_bolt/pool_projectile01_electric_bolt.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_projectile00_laser/pool_projectile00_laser.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_death/pool_part_death.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_hit_electricity/pool_part_hit_electricity.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_hit/pool_part_hit.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_nutsbolts/pool_part_nutsbolt.tscn" type="PackedScene" id=20]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -71,7 +71,7 @@ material = SubResource( 7 )
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 0.00609994 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=10]
 flags_transparent = true
 flags_unshaded = true
 flags_do_not_receive_shadows = true
@@ -80,7 +80,7 @@ params_cull_mode = 2
 albedo_color = Color( 0, 0.6, 1, 1 )
 albedo_texture = ExtResource( 9 )
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=11]
 flags_transparent = true
 params_billboard_mode = 3
 particles_anim_h_frames = 1
@@ -88,9 +88,9 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_color = Color( 0.341176, 0.352941, 0.564706, 1 )
 
-[sub_resource type="SphereMesh" id=11]
+[sub_resource type="SphereMesh" id=12]
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 0.658824, 0.854902, 1, 1 )
 albedo_texture = ExtResource( 11 )
 
@@ -106,6 +106,7 @@ camera_path = NodePath("../../planet_0/camera_persp")
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.253319, 0.256489, -12.3389 )
 
 [node name="environment" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="stars_layer_1" parent="environment" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0, 0 )
@@ -179,42 +180,42 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12467, -16.5148, -20.2681 )
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 23.6942, -12.4156 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog2"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -223,43 +224,43 @@ transform = Transform( -0.45207, 0, -0.891983, 0, 1, 0, 0.891983, 0, -0.45207, -
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 6, 2.38419e-007, 0, 0, -2.62268e-007, -4, -2.38419e-007, 6, -1.74846e-007, -20.8262, 10.661, -3.05176e-005 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, -3.05176e-005 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1527 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06847 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog4"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -268,43 +269,43 @@ transform = Transform( -0.983883, 0, -0.178814, 0, 1, 0, 0.178814, 0, -0.983883,
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog5"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -313,43 +314,43 @@ transform = Transform( -0.0986688, 0, -0.99512, 0, 1, 0, 0.99512, 0, -0.0986688,
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog6"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -358,43 +359,43 @@ transform = Transform( -0.0986688, 0, -0.99512, 0, 1, 0, 0.99512, 0, -0.0986688,
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog7"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -403,43 +404,43 @@ transform = Transform( 0.118043, 0, -0.993008, 0, 1, 0, 0.993008, 0, 0.118043, -
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog3"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -448,43 +449,43 @@ transform = Transform( 0.649612, 0, -0.760265, 0, 1, 0, 0.760265, 0, 0.649612, -
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog8"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -493,43 +494,43 @@ transform = Transform( -0.904329, 0, 0.426836, 0, 1, 0, -0.426836, 0, -0.904329,
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog9"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
@@ -538,56 +539,56 @@ transform = Transform( 0.0272975, 0, 0.999627, 0, 1, 0, -0.999627, 0, 0.0272975,
 
 [node name="Sprite3D" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, 0, 0, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 6, 0, 0, 0, -2.62268e-007, -4, 0, 6, -1.74846e-007, -20.8262, 10.661, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, -20.8262, -29.6163, 0 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D5" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 2.95259, 5.22324, -1.5221e-007, 0, -2.62268e-007, -4, -5.22324, 2.95259, -8.60414e-008, 36.5415, -29.6163, -12.1526 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D6" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 0.789843, 5.94779, -1.73324e-007, 0, -2.62268e-007, -4, -5.94779, 0.789843, -2.30168e-008, 37.1487, -29.6163, 6.06851 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D7" type="Sprite3D" parent="environment/fog10"]
 transform = Transform( 4.36545, -4.11617, 1.19949e-007, 0, -2.62268e-007, -4, 4.11617, 4.36545, -1.27213e-007, 52.109, -29.6163, 22.6437 )
-material_override = SubResource( 13 )
+material_override = SubResource( 10 )
 modulate = Color( 0.701961, 0.627451, 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Sprite3D" type="Sprite3D" parent="environment"]
 transform = Transform( 256, 0, 0, 0, 256, 0, 0, 0, 256, 371.813, -819.758, -706.045 )
 visible = false
-material_override = SubResource( 10 )
+material_override = SubResource( 11 )
 texture = ExtResource( 10 )
 
 [node name="planet" type="MeshInstance" parent="environment"]
 transform = Transform( 254.71, -19.2977, -16.9275, 2.91748, -145.958, 210.294, -25.5035, -209.427, -145.002, -269.733, -819.758, -706.045 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 12 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
 
 [node name="asteroid_belt" type="Spatial" parent="environment"]
 editor/display_folded = true
@@ -747,6 +748,8 @@ editor/display_folded = true
 [node name="gfx_hit_pool" parent="pools" instance=ExtResource( 19 )]
 
 [node name="gfx_nuts_bolts_pool" parent="pools" instance=ExtResource( 20 )]
+
+[node name="enemies" type="Spatial" parent="."]
 [connection signal="hit" from="player" to="." method="on_entity_hit"]
 [connection signal="hit_electricity" from="player" to="." method="on_entity_hit_electricity"]
 [connection signal="shoot" from="player" to="." method="on_entity_shoot"]

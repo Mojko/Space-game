@@ -11,4 +11,4 @@ func _ready():
 		spaceship_repository.append(get_node(i));
 		get_node(i).inactivate();
 		
-	emit_signal("equip_spaceship", spaceship_repository[0]);
+	emit_signal("equip_spaceship", spaceship_repository[1]);

@@ -7,9 +7,7 @@
 script = ExtResource( 1 )
 
 [node name="direction" parent="." instance=ExtResource( 2 )]
-from = Vector3( 0, 0, 0 )
 to = Vector3( 5, 0, 0 )
-look_at = false
 
 [node name="shoot_timer" type="Timer" parent="."]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

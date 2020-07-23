@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/level_select/objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_repository.gd" type="Script" id=2]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_noob/spaceship_noob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_0_noob/spaceship_0_noob.tscn" type="PackedScene" id=3]
 
 [sub_resource type="BoxShape" id=1]
 

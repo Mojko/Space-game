@@ -11,25 +11,27 @@ onready var death_timer = get_node("death_timer");
 var source : Spatial;
 var is_firing : bool;
 var fire_direction : Vector3;
-var speed : float;
 var invulnerables;
+var laser_data;
 
 func _ready():
 	pass
 
 func _process(delta):
 	if(is_firing):
-		self.global_transform.origin += speed * fire_direction * (delta * 50);
+		self.global_transform.origin += laser_data.speed * fire_direction * (delta * 50);
 		pass
 	pass
 
-func fire(from : Spatial, direction : Vector3, speed : float, invulnerables : Array):
+func fire(laser_data : Laser, from : Spatial, direction : Vector3, invulnerables : Array):
 	self.source = from;
 	self.is_firing = true;
 	self.fire_direction = direction;
-	self.speed = speed;
 	self.invulnerables = invulnerables;
+	self.laser_data = laser_data;
 	death_timer.start();
+	if($sfx_shoot != null):
+		$sfx_shoot.play();
 	
 	var nd : Vector3 = self.global_transform.origin - fire_direction;
 	look_at(Vector3(nd.x, 0, nd.z), Vector3.UP);
@@ -62,5 +64,4 @@ func reset():
 	self.source = null;
 	self.is_firing = false;
 	self.fire_direction = Vector3();
-	self.speed = 0;
 	self.invulnerables = null;

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_nutsbolts/pool_part_nutsbolt.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/particles/part_hit_nutsbolt/part_hit_nutsbolts.tscn" type="PackedScene" id=2]
+
+[node name="pool_part_nutsbolt" type="Node"]
+script = ExtResource( 1 )
+objectToPool = ExtResource( 2 )

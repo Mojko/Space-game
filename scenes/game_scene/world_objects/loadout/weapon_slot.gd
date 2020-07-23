@@ -1,7 +1,18 @@
 extends Spatial
 
-var current_laser;
-var can_shoot = true;
+export(Resource) var weapon : Resource;
+
+signal shoot(laser_data, from, direction);
+
+var current_laser : Resource;
+var can_shoot : bool = true;
+
+func _ready():
+	if(weapon == null):
+		return;
+		
+	self.current_laser = weapon;
+	$shoot_timer.wait_time = current_laser.cooldown;
 
 func shoot():
 	if(!can_shoot):
@@ -9,25 +20,10 @@ func shoot():
 	
 	can_shoot = false;
 	$shoot_timer.start();
-	
-	yield($shoot_timer, "timeout");
-	
-	return true;
+	emit_signal("shoot", current_laser, self, get_global_transform().basis.z);
 
-func equip_weapon(var laser):
-	self.current_laser = laser;
-	$shoot_timer.wait_time = laser.cooldown;
-	
 func has_weapon() -> bool:
 	return self.current_laser != null;
-	
-func get_weapon_direction() -> Vector3:
-	var direction = get_node("direction");
-	
-	if(direction == null):
-		return Vector3();
-	
-	return direction.get_pointing_direction_normalized();
 
 func _on_shoot_timer_timeout():
 	can_shoot = true;

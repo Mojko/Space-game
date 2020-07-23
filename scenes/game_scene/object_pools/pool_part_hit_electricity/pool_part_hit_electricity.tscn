@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/pool_part_hit_electricity/pool_part_hit_electricity.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/particles/part_hit_electricity/part_hit_electricity.tscn" type="PackedScene" id=2]
+
+[node name="pool_part_hit_electricity" type="Node"]
+script = ExtResource( 1 )
+objectToPool = ExtResource( 2 )

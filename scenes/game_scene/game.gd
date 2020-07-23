@@ -31,12 +31,8 @@ func load_scene(scene_data : Dictionary):
 	var planet_instance = SceneLoader.load_resource(scene_data.planet.get_path());
 	add_child(planet_instance);
 	
-#	planet_instance.connect("spawn_electric_bolt_projectile", projectile02_electric_bolt_pool, "_on_planet_spawn_electric_bolt_projectile");
-#	planet_instance.connect("spawn_gfx_death", gfx_death_pool, "_on_planet_spawn_gfx_death");
-#	planet_instance.connect("spawn_gfx_hit", gfx_hit_pool, "_on_planet_spawn_gfx_hit");
-#	planet_instance.connect("spawn_gfx_hit_electricity", gfx_hit_electricity_pool, "_on_planet_spawn_gfx_hit_electricity");
-#	planet_instance.connect("spawn_gfx_nuts_bolts", gfx_nuts_bolts_pool, "_on_planet_spawn_gfx_nuts_bolts");
-#	planet_instance.connect("spawn_laser_projectile", projectile01_laser_pool, "_on_planet_spawn_laser_projectile");
-	camera.connect("raycast_shoot", planet_instance.player, "_on_raycast_shoot");
-	planet_instance.player.connect("move", camera, "_on_player_move");
-	planet_instance.player.connect("move", $ground, "_on_player_move");
+	planet_instance.load_into_game(
+	{
+		"camera": camera,
+		"ground": $ground
+	});

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/pool_projectile00_laser/pool_projectile00_laser.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile00_laser/projectile00_laser.tscn" type="PackedScene" id=2]
+
+[node name="pool_projectile00_laser" type="Node"]
+script = ExtResource( 1 )
+objectToPool = ExtResource( 2 )

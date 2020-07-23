@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game_scene/object_pools/pool_projectile02_laserbeam/pool_projectile02_laserbeam.gd" type="Script" id=1]
+
+[node name="pool_projectile02_laserbeam" type="Node"]
+script = ExtResource( 1 )

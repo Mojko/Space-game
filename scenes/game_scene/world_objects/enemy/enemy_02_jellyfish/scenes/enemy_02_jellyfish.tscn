@@ -5,7 +5,9 @@
 [ext_resource path="res://scripts/physics_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/chasing.gd" type="Script" id=4]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/attacking.gd" type="Script" id=5]
-[ext_resource path="res://scenes/game_scene/particles/electrical_shield/electrical_shield.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game_scene/particles/part_electrical_shield/part_electrical_shield.tscn" type="PackedScene" id=6]
+
+
 
 
 

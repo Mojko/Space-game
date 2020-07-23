@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Laser",
 "language": "GDScript",
-"path": "res://scenes/game_scene/data/lasers/laser_resource.gd"
+"path": "res://scenes/game_scene/data/lasers/laser_data.gd"
 }, {
 "base": "Node",
 "class": "ObjectPool",
@@ -54,10 +54,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/resources/shop_item.gd"
 }, {
-"base": "Spatial",
+"base": "Resource",
 "class": "Spaceship",
 "language": "GDScript",
-"path": "res://scenes/game_scene/world_objects/player/spaceships/spaceship.gd"
+"path": "res://scenes/game_scene/data/spaceships/spaceship_data.gd"
 } ]
 _global_script_class_icons={
 "Alien": "",
