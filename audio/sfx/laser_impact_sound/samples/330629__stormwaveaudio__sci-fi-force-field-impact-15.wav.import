@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/330629__stormwaveaudio__sci-fi-force-field-impact-15.wav-fe67132923a4a08791723c3f6b37c94d.sample"
+
+[deps]
+
+source_file="res://audio/sfx/laser_impact_sound/samples/330629__stormwaveaudio__sci-fi-force-field-impact-15.wav"
+dest_files=[ "res://.import/330629__stormwaveaudio__sci-fi-force-field-impact-15.wav-fe67132923a4a08791723c3f6b37c94d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

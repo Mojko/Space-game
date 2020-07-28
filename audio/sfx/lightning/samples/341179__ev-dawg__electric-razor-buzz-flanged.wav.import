@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/341179__ev-dawg__electric-razor-buzz-flanged.wav-e38b9e32c9f972778d1a62b3c64486ad.sample"
+
+[deps]
+
+source_file="res://audio/sfx/lightning/samples/341179__ev-dawg__electric-razor-buzz-flanged.wav"
+dest_files=[ "res://.import/341179__ev-dawg__electric-razor-buzz-flanged.wav-e38b9e32c9f972778d1a62b3c64486ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

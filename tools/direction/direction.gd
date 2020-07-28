@@ -13,8 +13,14 @@ func _process(delta):
 	
 	begin(Mesh.PRIMITIVE_LINES);
 	
-	add_vertex(from);
-	add_vertex(to);
+	for x in 4:
+		for y in 4:
+			for z in 4:
+				var x_new = x * 0.01;
+				var y_new = y * 0.01;
+				var z_new = z * 0.01;
+				add_vertex(Vector3(from.x + x_new, from.y + y_new, from.z + z_new));
+				add_vertex(Vector3(to.x + x_new, to.y + y_new, to.z + z_new));
 	
 	#add_vertex((from - global_transform.basis.z) * 10);
 	

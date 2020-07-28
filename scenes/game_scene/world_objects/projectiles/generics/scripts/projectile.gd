@@ -1,12 +1,13 @@
-extends Spatial
+extends Area
+class_name ProjectileEntity
 
 export(String, "on_hit", "on_hit_electricity") var method_to_call;
-export(PackedScene) var hit_particle;
 
 signal hit();
 signal death(instance);
 
 onready var death_timer = get_node("death_timer");
+onready var sfx_shoot = get_node("sfx_shoot");
 
 var source : Spatial;
 var is_firing : bool;
@@ -15,13 +16,9 @@ var invulnerables;
 var laser_data;
 
 func _ready():
-	pass
-
-func _process(delta):
-	if(is_firing):
-		self.global_transform.origin += laser_data.speed * fire_direction * (delta * 50);
-		pass
-	pass
+	assert(death_timer);
+	assert(sfx_shoot);
+	connect("body_entered", self, "on_body_entered");
 
 func fire(laser_data : Laser, from : Spatial, direction : Vector3, invulnerables : Array):
 	self.source = from;
@@ -30,16 +27,9 @@ func fire(laser_data : Laser, from : Spatial, direction : Vector3, invulnerables
 	self.invulnerables = invulnerables;
 	self.laser_data = laser_data;
 	death_timer.start();
-	if($sfx_shoot != null):
-		$sfx_shoot.play();
-	
-	var nd : Vector3 = self.global_transform.origin - fire_direction;
-	look_at(Vector3(nd.x, 0, nd.z), Vector3.UP);
-	self.rotation.x = 0;
-	self.rotation.z = 0;
-	pass
+	sfx_shoot.play();
 
-func _on_laser_00_body_entered(body):
+func on_body_entered(body):
 	if(!is_firing):
 		return
 		
@@ -48,9 +38,9 @@ func _on_laser_00_body_entered(body):
 			return
 			
 	if(body.has_method(method_to_call)):
-		body.call(method_to_call, source);
+		body.call(method_to_call, source, laser_data.damage);
 		
-	die();
+	return true;
 	
 func die():
 	emit_signal("death", self);

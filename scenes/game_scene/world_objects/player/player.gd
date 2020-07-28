@@ -126,7 +126,7 @@ func _on_spaceship_repository_equip_spaceship(spaceship):
 # Returns: -
 #
 ####
-func on_hit(source):
+func on_hit(source, damage):
 	emit_signal("hit", Hit.Type.DEFAULT,self);
 	
 # Function: on_hit_electricity(source)
@@ -136,7 +136,7 @@ func on_hit(source):
 # Returns: -
 #
 ####
-func on_hit_electricity(source):
+func on_hit_electricity(source, damage):
 	emit_signal("hit", Hit.Type.ELECTRICITY, self);
 	
 #####

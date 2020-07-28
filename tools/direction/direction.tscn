@@ -5,3 +5,4 @@
 [node name="direction" type="ImmediateGeometry"]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0 )
 script = ExtResource( 1 )
+to = Vector3( 1, 0, 0 )

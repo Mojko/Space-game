@@ -1,17 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/generics/scripts/enemy.gd" type="Script" id=1]
-[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scenes/jellyfish_model.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/physics_state_machine.gd" type="Script" id=3]
-[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/chasing.gd" type="Script" id=4]
-[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/attacking.gd" type="Script" id=5]
-[ext_resource path="res://scenes/game_scene/particles/part_electrical_shield/part_electrical_shield.tscn" type="PackedScene" id=6]
-
-
-
-
-
-
+[ext_resource path="res://scenes/game_scene/data/enemies/enemy_02_jellyfish.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scenes/jellyfish_model.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/physics_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/chasing.gd" type="Script" id=5]
+[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scripts/attacking.gd" type="Script" id=6]
+[ext_resource path="res://scenes/game_scene/particles/part_electrical_shield/part_electrical_shield.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.37508, 2.66632, 2.19696 )
@@ -23,24 +18,29 @@ extents = Vector3( 1.37508, 2.66632, 2.19696 )
 collision_layer = 2
 collision_mask = 262146
 script = ExtResource( 1 )
+enemy_data = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="spaceship" parent="." instance=ExtResource( 2 )]
+[node name="spaceship" parent="." instance=ExtResource( 3 )]
 
 [node name="state_machine" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 state_map = [ "chasing", "attacking" ]
 
 [node name="chasing" type="Node" parent="state_machine"]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="attacking" type="Node" parent="state_machine"]
 editor/display_folded = true
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="shoot_delay" type="Timer" parent="state_machine/attacking"]
 
-[node name="electrical_shield" parent="." instance=ExtResource( 6 )]
+[node name="electrical_shield" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="sfx_on_hit" type="AudioStreamPlayer" parent="."]
+[connection signal="hit" from="." to="spaceship" method="_on_enemy_hit"]
 [connection signal="timeout" from="state_machine/attacking/shoot_delay" to="state_machine/attacking" method="_on_shoot_delay_timeout"]

@@ -23,6 +23,7 @@ shape = SubResource( 1 )
 [node name="spaceship_repository" type="Spatial" parent="."]
 script = ExtResource( 2 )
 spaceship_repository_paths = [ NodePath("spaceship_noob"), NodePath("spaceship_1"), NodePath("spaceship_2") ]
+temp_spaceship_to_equip = NodePath("spaceship_2")
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
 speed = 8.0

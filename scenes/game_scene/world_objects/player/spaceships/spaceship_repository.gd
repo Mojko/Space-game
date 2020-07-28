@@ -1,6 +1,7 @@
 extends Node
 
 export(Array, NodePath) var spaceship_repository_paths;
+export(NodePath) var temp_spaceship_to_equip;
 
 signal equip_spaceship(spaceship);
 
@@ -11,4 +12,7 @@ func _ready():
 		spaceship_repository.append(get_node(i));
 		get_node(i).inactivate();
 		
-	emit_signal("equip_spaceship", spaceship_repository[1]);
+	if(temp_spaceship_to_equip != ""):
+		emit_signal("equip_spaceship", get_node(temp_spaceship_to_equip));
+	else:
+		emit_signal("equip_spaceship", spaceship_repository[0]);

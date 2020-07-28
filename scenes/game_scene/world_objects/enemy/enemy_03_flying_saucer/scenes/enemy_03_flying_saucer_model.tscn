@@ -1,62 +1,70 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://models/enemy_03_flying_saucer/enemy_03_flying_saucer.dae" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/generics/scripts/alien.gd" type="Script" id=2]
-[ext_resource path="res://scripts/spinner.gd" type="Script" id=3]
-[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_03_flying_saucer/scenes/light.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/game_scene/world_objects/loadout/loadout.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game_scene/world_objects/loadout/weapon_slot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/game_scene/data/lasers/laser_01.tres" type="Resource" id=7]
+[ext_resource path="res://scripts/model_flash_hurt_effect.gd" type="Script" id=3]
+[ext_resource path="res://materials/white.tres" type="Material" id=4]
+[ext_resource path="res://scripts/spinner.gd" type="Script" id=5]
+[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_03_flying_saucer/scenes/light.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game_scene/world_objects/loadout/loadout.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game_scene/world_objects/loadout/weapon_slot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game_scene/data/lasers/laser_01.tres" type="Resource" id=9]
 
 [node name="enemy_03_flying_saucer_model" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="Cube" parent="." index="0"]
+script = ExtResource( 3 )
+hurt_material = ExtResource( 4 )
+
 [node name="Circle" parent="." index="1"]
 script = ExtResource( 3 )
-spin_axis = "y"
+hurt_material = ExtResource( 4 )
 
 [node name="lights" type="Spatial" parent="." index="3"]
 editor/display_folded = true
 visible = false
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 spin_axis = "y"
 
-[node name="light" parent="lights" index="0" instance=ExtResource( 4 )]
+[node name="light" parent="lights" index="0" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617846, 0.575589, 1.55481 )
 
-[node name="light2" parent="lights" index="1" instance=ExtResource( 4 )]
+[node name="light2" parent="lights" index="1" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70975, 0.496186, 0.552365 )
 
-[node name="light3" parent="lights" index="2" instance=ExtResource( 4 )]
+[node name="light3" parent="lights" index="2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69624, 0.496186, -1.05806 )
 
-[node name="light4" parent="lights" index="3" instance=ExtResource( 4 )]
+[node name="light4" parent="lights" index="3" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.478933, 0.496187, -1.77821 )
 
-[node name="light5" parent="lights" index="4" instance=ExtResource( 4 )]
+[node name="light5" parent="lights" index="4" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.914065, 0.496186, -1.72441 )
 
-[node name="light6" parent="lights" index="5" instance=ExtResource( 4 )]
+[node name="light6" parent="lights" index="5" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4693, 0.496186, 1.62943 )
 
-[node name="light7" parent="lights" index="6" instance=ExtResource( 4 )]
+[node name="light7" parent="lights" index="6" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66835, 0.496186, 0.862729 )
 
-[node name="light8" parent="lights" index="7" instance=ExtResource( 4 )]
+[node name="light8" parent="lights" index="7" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68827, 0.496186, -0.463512 )
 
-[node name="loadout" parent="." index="4" instance=ExtResource( 5 )]
+[node name="loadout" parent="." index="4" instance=ExtResource( 7 )]
 weapon_slots_path = [ NodePath("weapon_slot_1"), NodePath("weapon_slot_2"), NodePath("weapon_slot_3") ]
 
-[node name="weapon_slot_1" parent="loadout" index="0" instance=ExtResource( 6 )]
+[node name="weapon_slot_1" parent="loadout" index="0" instance=ExtResource( 8 )]
 transform = Transform( 0.757634, 0, 0.65268, 0, 1, 0, -0.65268, 0, 0.757634, 1.00796, 0.475359, 1.60418 )
-weapon = ExtResource( 7 )
+weapon = ExtResource( 9 )
 
-[node name="weapon_slot_2" parent="loadout" index="1" instance=ExtResource( 6 )]
+[node name="weapon_slot_2" parent="loadout" index="1" instance=ExtResource( 8 )]
 transform = Transform( 0.907646, 0, -0.419737, 0, 1, 0, 0.419737, 0, 0.907646, -0.882701, 0.475359, 1.60418 )
-weapon = ExtResource( 7 )
+weapon = ExtResource( 9 )
 
-[node name="weapon_slot_3" parent="loadout" index="2" instance=ExtResource( 6 )]
+[node name="weapon_slot_3" parent="loadout" index="2" instance=ExtResource( 8 )]
 transform = Transform( 0.999986, 0, -0.00522432, 0, 1, 0, 0.00522432, 0, 0.999986, 0.117605, 0.475359, 1.60418 )
-weapon = ExtResource( 7 )
+weapon = ExtResource( 9 )
+[connection signal="flash" from="." to="Cube" method="_on_model_flash"]
+[connection signal="flash" from="." to="Circle" method="_on_model_flash"]
 [connection signal="shoot" from="loadout" to="." method="_on_loadout_shoot"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/projectile03_laserbeam.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/projectile02_laserbeam.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/part_laser.gd" type="Script" id=2]
-
-
+[ext_resource path="res://audio/sfx/laser_impact_sound/laser_impact_sound3.wav" type="AudioStream" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -18,33 +17,41 @@ albedo_color = Color( 0.309804, 0.0627451, 0.0627451, 1 )
 [sub_resource type="SphereMesh" id=2]
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.301777, 0.175486, 2.84953 )
+extents = Vector3( 1, 1, 8.61833 )
 
-[node name="projectile03_laserbeam" type="Area"]
+[node name="projectile02_laserbeam" type="Area"]
+collision_layer = 262144
+collision_mask = 131073
 script = ExtResource( 1 )
+method_to_call = "on_hit"
 
 [node name="gfx_laser" type="CPUParticles" parent="."]
+editor/display_folded = true
 transform = Transform( -0.25, 0, -3.7749e-008, 0, 0.25, 0, 3.7749e-008, 0, -0.25, 0, 0, 0 )
 material_override = SubResource( 1 )
 amount = 100
-lifetime = 0.2
+lifetime = 0.4
 mesh = SubResource( 2 )
 emission_points = PoolVector3Array( 0, 0, 0, 0, 0, 0.1, 0, 0, 0.2, 0, 0, 0.3, 0, 0, 0.4, 0, 0, 0.5, 0, 0, 0.6, 0, 0, 0.7, 0, 0, 0.8, 0, 0, 0.9, 0, 0, 1, 0, 0, 1.1, 0, 0, 1.2, 0, 0, 1.3, 0, 0, 1.4, 0, 0, 1.5, 0, 0, 1.6, 0, 0, 1.7, 0, 0, 1.8, 0, 0, 1.9, 0, 0, 2, 0, 0, 2.1, 0, 0, 2.2, 0, 0, 2.3, 0, 0, 2.4 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 150.0
+initial_velocity = 170.0
 angular_velocity = 1.06134e-005
 color = Color( 0.258824, 0.592157, 0.403922, 1 )
 script = ExtResource( 2 )
 
 [node name="tween_shrink" type="Tween" parent="gfx_laser"]
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.86784 )
+[node name="hitbox" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.66662 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="death_timer" type="Timer" parent="."]
 wait_time = 0.5
-[connection signal="body_entered" from="." to="." method="_on_projectile03_laserbeam_body_entered"]
-[connection signal="timeout" from="death_timer" to="gfx_laser" method="_on_death_timer_timeout"]
+
+[node name="sfx_shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
 [connection signal="timeout" from="death_timer" to="." method="die"]
+[connection signal="timeout" from="death_timer" to="gfx_laser" method="_on_death_timer_timeout"]

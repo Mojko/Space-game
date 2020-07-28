@@ -31,6 +31,8 @@ var enemies : Array = [];
 #
 ####
 func _ready():
+	if($enemies == null):
+		print("System Node 'enemies' need to be added to scene", self.name);
 	hide_teleporter();
 
 #####
@@ -89,6 +91,8 @@ func connect_player_signals():
 func connect_enemy_signals():
 	if($enemies == null):
 		print("System Node 'enemies' need to be added to scene", self.name);
+		return;
+		
 	for enemy in $enemies.get_children():
 		enemy.connect("death", self, "on_entity_death");
 		enemy.connect("hit", self, "on_entity_hit");
@@ -101,7 +105,11 @@ func connect_enemy_signals():
 #
 ####
 func check_win(last_enemy):
-	if(enemies.size() <= 0):
+	if($enemies == null):
+		print("System Node 'enemies' need to be added to scene", self.name);
+		return;
+		
+	if($enemies.get_children().size() <= 1):
 		show_teleporter(last_enemy.global_transform.origin);
 
 #####

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/game_scene/planets/planet.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_03_flying_saucer/scenes/enemy_03_flying_saucer.tscn" type="PackedScene" id=2]
@@ -16,11 +16,12 @@
 [ext_resource path="res://scenes/game_scene/object_pools/pool_projectile01_electric_bolt/pool_projectile01_electric_bolt.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_projectile00_laser/pool_projectile00_laser.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_projectile02_laserbeam/pool_projectile02_laserbeam.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/projectile03_laserbeam.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/game_scene/world_objects/projectiles/projectile02_laserbeam/projectile02_laserbeam.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_part_death/pool_part_death.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_part_hit_electricity/pool_part_hit_electricity.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_part_hit/pool_part_hit.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/game_scene/object_pools/pool_part_nutsbolts/pool_part_nutsbolt.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/game_scene/world_objects/enemy/enemy_02_jellyfish/scenes/enemy_02_jellyfish.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
@@ -662,6 +663,7 @@ transform = Transform( 0.665656, 0.620029, 0.415294, -0.573987, 0.781027, -0.246
 script = ExtResource( 12 )
 
 [node name="pools" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="projectile02_electric_bolt_pool" parent="pools" instance=ExtResource( 14 )]
 
@@ -680,6 +682,18 @@ objectToPool = ExtResource( 17 )
 
 [node name="enemies" type="Spatial" parent="."]
 
-[node name="enemy_03_flying_saucer" parent="enemies" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.0851 )
+[node name="enemy_02_jellyfish" parent="enemies" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0423279, 0, -40.5161 )
+
+[node name="enemy_02_jellyfish2" parent="enemies" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6172, 0, -28.9979 )
+
+[node name="enemy_02_jellyfish3" parent="enemies" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2737, 0, -29.7559 )
+
+[node name="enemy_02_jellyfish4" parent="enemies" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4829, -2.31975, -16.3454 )
+
+[node name="enemy_02_jellyfish5" parent="enemies" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5596, -1.55337, -16.1131 )
 [connection signal="teleport_jump" from="teleporter" to="." method="_on_teleporter_teleport_jump"]

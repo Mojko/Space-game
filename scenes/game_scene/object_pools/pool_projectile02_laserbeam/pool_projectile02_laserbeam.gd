@@ -12,4 +12,4 @@ func expand(size):
 func _on_planet_spawn_laserbeam_projectile(laser_data, from, direction, invulnerables):
 	var instance = spawn_object_from_pool(from.global_transform.origin);
 	
-	instance.fire(from, direction, invulnerables);
+	instance.fire(laser_data, from, direction, invulnerables);

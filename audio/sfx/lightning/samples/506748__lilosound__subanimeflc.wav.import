@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/506748__lilosound__subanimeflc.wav-50d0321cb4ce0fb25199e799dc378761.sample"
+
+[deps]
+
+source_file="res://audio/sfx/lightning/samples/506748__lilosound__subanimeflc.wav"
+dest_files=[ "res://.import/506748__lilosound__subanimeflc.wav-50d0321cb4ce0fb25199e799dc378761.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
