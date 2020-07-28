@@ -18,8 +18,8 @@ camera_path = NodePath("camera_persp")
 environment = ExtResource( 3 )
 
 [node name="minimap" parent="." groups=[
-"spawn_listener",
 "death_listener",
+"spawn_listener",
 ] instance=ExtResource( 4 )]
 minimap_path = NodePath("../../game/minimap/minimap")
 

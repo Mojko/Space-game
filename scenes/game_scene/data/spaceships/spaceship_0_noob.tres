@@ -12,3 +12,4 @@ health = 100
 speed = 8.0
 acceleration_curve = SubResource( 1 )
 collision_shape = ExtResource( 1 )
+spaceship_type = 0

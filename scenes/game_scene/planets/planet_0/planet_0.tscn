@@ -87,7 +87,6 @@ enemy_scenes = [ ExtResource( 2 ), ExtResource( 2 ) ]
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 collision_layer = 131073
-camera_path = NodePath("../../planet_0/camera_persp")
 
 [node name="teleporter" parent="." instance=ExtResource( 4 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.253319, 0.256489, -12.3389 )

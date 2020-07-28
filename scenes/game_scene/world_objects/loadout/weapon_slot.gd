@@ -1,6 +1,7 @@
 extends Spatial
 
 export(Resource) var weapon : Resource;
+export(bool) var has_weapon : bool;
 
 signal shoot(laser_data, from, direction);
 
@@ -13,8 +14,11 @@ func _ready():
 		
 	self.current_laser = weapon;
 	$shoot_timer.wait_time = current_laser.cooldown;
-
+	
 func shoot():
+	if(!has_weapon):
+		return false;
+	
 	if(!can_shoot):
 		return false;
 	

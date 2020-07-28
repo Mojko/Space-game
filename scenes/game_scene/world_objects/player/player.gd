@@ -1,14 +1,11 @@
 extends Entity
 class_name Player
 
-export(NodePath) var camera_path;
-
 signal move(new_position);
 signal shoot(laser_data, from, direction, invulnerables);
 signal hit(type, who);
 signal hit_electricity(who);
 
-onready var camera : Camera = get_node(camera_path);
 onready var aim_timer : Timer = get_node("aim_timer");
 onready var shooting_behaviour : Node = get_node("player_shooting_behaviour");
 
@@ -117,7 +114,7 @@ func _on_spaceship_repository_equip_spaceship(spaceship):
 	self.spaceship = spaceship;
 	self.spaceship.connect("shoot", self, "_on_spaceship_shoot");
 	self.spaceship.activate();
-	$CollisionShape.shape = self.spaceship.collision_shape;
+	$CollisionShape.shape = self.spaceship.get_collision_shape();
 
 # Function: on_hit(source)
 # 

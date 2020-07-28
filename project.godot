@@ -104,6 +104,7 @@ MaskHelper="*res://scripts/mask.gd"
 Hit="*res://scripts/hit.gd"
 SceneLoader="*res://scenes/scene_loader.gd"
 PathArray="*res://scripts/path_array.gd"
+GlobalPlayerData="*res://scripts/singletons/global_player_data.gd"
 
 [display]
 

@@ -2,10 +2,7 @@ extends Spatial
 
 signal shoot(laser_data, from, direction);
 
-export(int, 0, 1000, 1.0) var health;
-export(float, 0, 1000, 0.01) var speed;
-export(Curve) var acceleration_curve;
-export(Resource) var collision_shape;
+export(Resource) var spaceship_data;
 
 onready var loadout = get_node("loadout");
 
@@ -13,13 +10,13 @@ func set_thrust_state(state):
 	$fire_particles.emit(state);
 
 func get_acceleration(var x : float) -> float:
-	return acceleration_curve.interpolate(x);
+	return spaceship_data.acceleration_curve.interpolate(x);
 	
 func get_acceleration_curve() -> Curve:
-	return acceleration_curve;
+	return spaceship_data.acceleration_curve;
 
 func get_speed() -> float:
-	return speed;
+	return spaceship_data.speed;
 	
 func inactivate():
 	set_process(false);
@@ -32,7 +29,10 @@ func activate():
 	show();
 	
 func get_collision_shape_copy():
-	return collision_shape.instance();
+	return spaceship_data.collision_shape.instance();
+	
+func get_collision_shape():
+	return spaceship_data.collision_shape;
 
 func _on_loadout_shoot(laser_data, from, direction):
 	emit_signal("shoot", laser_data, from, direction);
