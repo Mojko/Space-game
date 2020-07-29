@@ -1,19 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game_scene/world_objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_repository.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_0_noob/spaceship_0_noob.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/game_scene/data/spaceships/spaceship_0_noob.tres" type="Resource" id=4]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_1/spaceship_1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game_scene/data/spaceships/spaceship_1.tres" type="Resource" id=6]
-[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_2/spaceship_2.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/game_scene/data/spaceships/spaceship_2.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/game_scene/world_objects/player/spaceships/spaceship_2/spaceship_2.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 
 [node name="player" type="KinematicBody" groups=[
-"friendly",
 "player",
+"friendly",
 ]]
 collision_mask = 262144
 script = ExtResource( 1 )
@@ -25,13 +21,8 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
-spaceship_data = ExtResource( 4 )
 
-[node name="spaceship_1" parent="spaceship_repository" instance=ExtResource( 5 )]
-spaceship_data = ExtResource( 6 )
-
-[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 7 )]
-spaceship_data = ExtResource( 8 )
+[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 4 )]
 
 [node name="aim_timer" type="Timer" parent="."]
 wait_time = 0.5

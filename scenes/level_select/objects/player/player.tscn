@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/level_select/objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/level_select/objects/player/spaceship/repository/spaceship_repository.gd" type="Script" id=2]
 [ext_resource path="res://models/spaceship_noob/spaceship_noob.dae" type="PackedScene" id=3]
 [ext_resource path="res://scenes/level_select/objects/player/spaceship/spaceship.gd" type="Script" id=4]
-[ext_resource path="res://models/spaceship_1/spaceship_1.dae" type="PackedScene" id=5]
-[ext_resource path="res://models/spaceship_2/spaceship_2.dae" type="PackedScene" id=6]
+[ext_resource path="res://models/spaceship_2/spaceship_2.dae" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -18,13 +17,9 @@ script = ExtResource( 2 )
 [node name="spaceship_noob" parent="spaceship_repository" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
 
-[node name="spaceship_1" parent="spaceship_repository" instance=ExtResource( 5 )]
+[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 5 )]
 script = ExtResource( 4 )
-spaceship_type = 1
-
-[node name="spaceship_2" parent="spaceship_repository" instance=ExtResource( 6 )]
-script = ExtResource( 4 )
-spaceship_type = 2
+spaceship_id = 1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

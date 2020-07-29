@@ -1,6 +1,6 @@
 extends Spatial
 
-export(GlobalPlayerData.SpaceshipType) var spaceship_type;
+export(SpaceshipId.Id) var spaceship_id;
 
 func activate():
 	set_process(true);

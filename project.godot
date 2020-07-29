@@ -105,6 +105,9 @@ Hit="*res://scripts/hit.gd"
 SceneLoader="*res://scenes/scene_loader.gd"
 PathArray="*res://scripts/path_array.gd"
 GlobalPlayerData="*res://scripts/singletons/global_player_data.gd"
+ShopItemId="*res://scripts/singletons/shop_item_id.gd"
+SpaceshipId="*res://scripts/singletons/spaceship_id.gd"
+LaserId="*res://scripts/singletons/laser_id.gd"
 
 [display]
 

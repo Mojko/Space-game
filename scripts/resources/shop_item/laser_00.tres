@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+id = 2
+type = 1
 preview_model_name = "blä"
 cost = 10
